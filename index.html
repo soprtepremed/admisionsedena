@@ -126,6 +126,53 @@
             transform: rotate(90deg);
         }
 
+
+
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 80px;
+            /* A la izquierda del de ajustes */
+            background: var(--secondary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px var(--shadow);
+            z-index: 1000;
+            display: none;
+            /* Se muestra al loguearse */
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(39, 174, 96, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+            }
+        }
+
         .sidebar {
             position: fixed;
             top: 0;
@@ -495,6 +542,11 @@
 
     <!-- SIDEBAR DE CONFIGURACIÓN -->
     <button class="settings-btn" id="settings-toggle" onclick="toggleSidebar()">⚙️</button>
+    <button class="music-btn" id="music-toggle" onclick="toggleMusic()">🎵</button>
+
+    <audio id="bg-music" loop>
+        <source src="musica.mp3" type="audio/mpeg">
+    </audio>
 
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
@@ -2061,6 +2113,49 @@
             if (percentage >= 90) feedbackEl.textContent = "¡Excelente! Estás listo.";
             else if (percentage >= 80) feedbackEl.textContent = "Muy bien, pero repasa los errores.";
             else feedbackEl.textContent = "Necesitas practicar más. Revisa el patrón.";
+        }
+
+        // --- SISTEMA DE MUSICA Y UI UPDATES ---
+
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+
+            if (!audio || !btn) return;
+
+            if (audio.paused) {
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        btn.classList.add('playing');
+                        btn.innerHTML = '⏸'; // Pausa
+                    })
+                        .catch(error => {
+                            alert("⚠️ No se pudo reproducir música.\n\nAsegúrate de tener un archivo llamado 'musica.mp3' en la misma carpeta que este archivo index.html.");
+                            console.error("Error Audio:", error);
+                        });
+                }
+            } else {
+                audio.pause();
+                btn.classList.remove('playing');
+                btn.innerHTML = '🎵'; // Nota musical
+            }
+        }
+
+        // Sobrescribimos o definimos initializeSystem para asegurar que muestre los botones
+        function initializeSystem() {
+            const settingsBtn = document.getElementById('settings-toggle');
+            const musicBtn = document.getElementById('music-toggle');
+
+            if (settingsBtn) settingsBtn.style.display = 'flex';
+            if (musicBtn) musicBtn.style.display = 'flex';
+
+            // Navegación segura
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const menuScreen = document.getElementById('menu-screen');
+            if (menuScreen) menuScreen.classList.add('active');
+
+            if (typeof loadSavedTheme === 'function') loadSavedTheme();
         }
 
     </script>
