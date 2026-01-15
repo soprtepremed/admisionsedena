@@ -544,8 +544,8 @@
     <button class="settings-btn" id="settings-toggle" onclick="toggleSidebar()">⚙️</button>
     <button class="music-btn" id="music-toggle" onclick="toggleMusic()">🎵</button>
 
-    <audio id="bg-music" loop>
-        <source src="musica.mp3" type="audio/mpeg">
+    <audio id="bg-music">
+        <!-- La fuente se gestionará dinámicamente con JavaScript -->
     </audio>
 
     <div class="sidebar" id="sidebar">
@@ -1061,7 +1061,18 @@
             }
         ];
 
+
         // --- VARIABLES GLOBALES ---
+
+        // 🎵 CONFIGURACIÓN DE LISTA DE REPRODUCCIÓN
+        // Agrega aquí los nombres de tus archivos de música nuevos
+        const playlist = [
+            "musica.mp3",
+            "intanteria.mp3",
+            "paracaidistas.mp3"
+        ];
+        let currentSongIndex = 0;
+
         let currentQuestions = [];
         let currentQuestionIndex = 0;
         let userAnswers = {};
@@ -2117,6 +2128,37 @@
 
         // --- SISTEMA DE MUSICA Y UI UPDATES ---
 
+        // Inicializar sistema de música
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('bg-music');
+            if (audio) {
+                // Cuando termina una canción, pasar a la siguiente
+                audio.addEventListener('ended', playNextSong);
+            }
+        });
+
+        function playNextSong() {
+            const audio = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+
+            // Avanzar índice
+            currentSongIndex++;
+            if (currentSongIndex >= playlist.length) {
+                currentSongIndex = 0; // Volver al inicio (Loop de la lista)
+            }
+
+            // Cargar y reproducir
+            audio.src = playlist[currentSongIndex];
+            audio.play()
+                .then(() => {
+                    if (btn) {
+                        btn.classList.add('playing');
+                        btn.innerHTML = '⏸';
+                    }
+                })
+                .catch(e => console.log("Error al reproducir siguiente canción:", e));
+        }
+
         function toggleMusic() {
             const audio = document.getElementById('bg-music');
             const btn = document.getElementById('music-toggle');
@@ -2124,6 +2166,11 @@
             if (!audio || !btn) return;
 
             if (audio.paused) {
+                // Si no tiene fuente cargada, cargar la canción actual
+                if (!audio.src || audio.src === '' || audio.src.endsWith('index.html')) {
+                    audio.src = playlist[currentSongIndex];
+                }
+
                 const playPromise = audio.play();
                 if (playPromise !== undefined) {
                     playPromise.then(_ => {
@@ -2131,7 +2178,7 @@
                         btn.innerHTML = '⏸'; // Pausa
                     })
                         .catch(error => {
-                            alert("⚠️ No se pudo reproducir música.\n\nAsegúrate de tener un archivo llamado 'musica.mp3' en la misma carpeta que este archivo index.html.");
+                            alert(`⚠️ No se pudo reproducir: ${playlist[currentSongIndex]}\n\nAsegúrate de que el archivo esté en la carpeta.`);
                             console.error("Error Audio:", error);
                         });
                 }
