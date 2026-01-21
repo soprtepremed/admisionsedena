@@ -1,0 +1,597 @@
+{
+  "examen": "Examen Psicométrico SEDENA / GN",
+  "preguntas": [
+    {
+      "numero": 1,
+      "pregunta": "Lo opuesto al odio es:",
+      "opciones": ["enemigo", "temor", "amor", "amigo", "alegría"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "amor"
+    },
+    {
+      "numero": 2,
+      "pregunta": "Si tres lápices cuestan cinco pesos, ¿Cuántos lápices podré comprar con cincuenta pesos?",
+      "opciones": ["30", "25", "36", "15", "40"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "30"
+    },
+    {
+      "numero": 3,
+      "pregunta": "Un pájaro no siempre tiene:",
+      "opciones": ["alas", "ojos", "patas", "nido", "pico"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "nido"
+    },
+    {
+      "numero": 4,
+      "pregunta": "Lo opuesto a honor es:",
+      "opciones": ["derrota", "villanía", "humillación", "cobardía", "miedo"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "cobardía"
+    },
+    {
+      "numero": 5,
+      "pregunta": "El zorro se parece más a:",
+      "opciones": ["el lobo", "la cabra", "el cerdo", "el tigre", "el gato"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "el lobo"
+    },
+    {
+      "numero": 6,
+      "pregunta": "El silencio tiene la misma relación con el sonido que la oscuridad con:",
+      "opciones": ["sótano", "luz", "ruido", "quietud", "noche"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "luz"
+    },
+    {
+      "numero": 7,
+      "pregunta": "Un grupo consistía en dos matrimonios, dos hermanos y dos hermanas. ¿Cuál es el número mínimo de personas que podrían componer el grupo?",
+      "opciones": ["2", "8", "6", "5", "4"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "2"
+    },
+    {
+      "numero": 8,
+      "pregunta": "Un árbol siempre tiene:",
+      "opciones": ["hojas", "fruto", "yemas", "raíces", "sombra"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "raíces"
+    },
+    {
+      "numero": 9,
+      "pregunta": "Lo opuesto de lo económico es:",
+      "opciones": ["barato", "avaro", "gastador", "valor", "rico"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "gastador"
+    },
+    {
+      "numero": 10,
+      "pregunta": "La plata es más cara que el hierro porque es:",
+      "opciones": ["más pesada", "más escasa", "más blanca", "más dura", "más hermosa"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "más escasa"
+    },
+    {
+      "numero": 11,
+      "pregunta": "¿Cuál de las seis razones expresa el significado del refrán?: \"Comida hecha compañía desecha\".",
+      "opciones": [
+        "No hay que separarse de los amigos después de comer.",
+        "No se debe olvidar el beneficio recibido y alejarse de aquel de quien se recibió.",
+        "A nada conduce prolongar demasiado un asunto.",
+        "La mayor dificultad en cualquier cosa consiste, por lo común en los principios.",
+        "Es peligroso prolongar la sobremesa.",
+        "Cada uno debe mirar antes por sí mismo que por los otros"
+      ],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "No se debe olvidar el beneficio recibido y alejarse de aquel de quien se recibió."
+    },
+    {
+      "numero": 12,
+      "pregunta": "¿Cuál de las seis razones expresa el significado de este proverbio? \"Obra empezada, medio acabada\".",
+      "opciones": [
+        "No hay que separarse de los amigos después de comer.",
+        "No se debe olvidar el beneficio recibido y alejarse de aquel de quien se recibió.",
+        "A nada conduce prolongar demasiado un asunto.",
+        "La mayor dificultad en cualquier cosa consiste, por lo común en los principios.",
+        "Es peligroso prolongar la sobremesa.",
+        "Cada uno debe mirar antes por sí mismo que por los otros"
+      ],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "A nada conduce prolongar demasiado un asunto."
+    },
+    {
+      "numero": 13,
+      "pregunta": "¿Cuál de las seis razones explica el proverbio \"Antes son mis dientes que mis parientes\"",
+      "opciones": [
+        "No hay que separarse de los amigos después de comer.",
+        "No se debe olvidar el beneficio recibido y alejarse de aquel de quien se recibió.",
+        "A nada conduce prolongar demasiado un asunto.",
+        "La mayor dificultad en cualquier cosa consiste, por lo común en los principios.",
+        "Es peligroso prolongar la sobremesa.",
+        "Cada uno debe mirar antes por sí mismo que por los otros"
+      ],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "Cada uno debe mirar antes por sí mismo que por los otros"
+    },
+    {
+      "numero": 14,
+      "pregunta": "Una luz eléctrica se relaciona con la bujía (vela de alumbrar) como un automóvil se relaciona con:",
+      "opciones": ["un carruaje", "la electricidad", "una llanta", "la velocidad", "el resplandor"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "un carruaje"
+    },
+    {
+      "numero": 15,
+      "pregunta": "Si un caballo puede correr a la velocidad de 6 metros en un 1/4 de segundo, ¿Cuántos metros corre en 10 segundos?",
+      "opciones": ["120", "240", "24", "60", "100"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "240"
+    },
+    {
+      "numero": 16,
+      "pregunta": "Una comida siempre supone:",
+      "opciones": ["mesa", "plato", "hambre", "alimento", "agua"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "alimento"
+    },
+    {
+      "numero": 17,
+      "pregunta": "De las cinco palabras siguientes cuatro son parecidas, ¿Cuál es la que no es parecida a esas cuatro?",
+      "opciones": ["postre", "lima", "pato", "papel", "claro"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "claro"
+    },
+    {
+      "numero": 18,
+      "pregunta": "Lo opuesto a nunca es:",
+      "opciones": ["a menudo", "a veces", "frecuentemente", "siempre", "de vez en cuando"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "siempre"
+    },
+    {
+      "numero": 19,
+      "pregunta": "Un reloj tiene con el tiempo, la misma relación que un termómetro con:",
+      "opciones": ["un reloj", "caliente", "tubo", "mercurio", "temperatura"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "temperatura"
+    },
+    {
+      "numero": 20,
+      "pregunta": "¿Cuál de las siguientes palabras debería ponerse en el espacio en blanco para que sea cierta la afirmación: \"____ los hombres son mas bajos que sus esposas\".",
+      "opciones": ["siempre", "a menudo", "a veces", "raras veces", "nunca"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "a veces"
+    },
+    {
+      "numero": 21,
+      "pregunta": "En la siguiente serie hay un número equivocado. ¿Cuál debería ocupar su lugar? 1-4-2-5-3-6-4-7-5-9-6-9",
+      "opciones": ["8", "10", "12", "11", "13"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "8"
+    },
+    {
+      "numero": 22,
+      "pregunta": "Si las dos primeras proposiciones son ciertas la terceras es: 1. Todos los miembros de este club son argentinos. 2. González no es argentino. 3. González es miembro de este club.",
+      "opciones": ["verdadera", "falsa", "dudosa"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "falsa"
+    },
+    {
+      "numero": 23,
+      "pregunta": "una lucha siempre tiene",
+      "opciones": ["réferi", "contendientes", "espectadores", "aplausos", "victoria"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "contendientes"
+    },
+    {
+      "numero": 24,
+      "pregunta": "¿Encuentra el valor que continua en la serie? 20, 28, 30, 38, 40, 48,",
+      "opciones": ["58", "49", "35", "50"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "50"
+    },
+    {
+      "numero": 25,
+      "pregunta": "De los números que se repiten 3 veces en la siguiente serie, ¿Cuál es el número más pequeño? 6-4-5-3-7-8-9-5-9-8-8-6-5-4-7-3-8-9",
+      "opciones": ["0", "9", "5", "8", "7"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "9"
+    },
+    {
+      "numero": 26,
+      "pregunta": "La luna se relaciona con la tierra como la tierra con:",
+      "opciones": ["marte", "el sol", "las nubes", "las estrellas", "el universo"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "el sol"
+    },
+    {
+      "numero": 27,
+      "pregunta": "¿Qué palabra hace falta para que sea verdadera la siguiente proposición? \"Los padres son ____ más prudentes que los hijos\".",
+      "opciones": ["siempre", "usualmente", "mucho", "raras veces", "nunca"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "usualmente"
+    },
+    {
+      "numero": 28,
+      "pregunta": "¿Encuentra el valor que continua en la serie? 30, 40, 60, 90...",
+      "opciones": ["130", "110", "120", "140"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "130"
+    },
+    {
+      "numero": 29,
+      "pregunta": "Sofía dibuja círculos: uno azul, verde, uno rojo, uno negro, uno amarillo y así sucesivamente. ¿De qué color es el 28avo. círculo?",
+      "opciones": ["Azul", "Verde", "Rojo", "Negro", "amarillo"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "Rojo"
+    },
+    {
+      "numero": 30,
+      "pregunta": "lo opuesto a extraño:",
+      "opciones": ["oportuno", "normal", "habitual", "corriente", "común"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "común"
+    },
+    {
+      "numero": 31,
+      "pregunta": "Lo opuesto a torpe es:",
+      "opciones": ["fuerte", "bonito", "corto", "hábil", "rápido"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "hábil"
+    },
+    {
+      "numero": 32,
+      "pregunta": "Una madre siempre es más ____ que su hija\"",
+      "opciones": ["sabia", "alta", "gruesa", "vieja", "arrugada"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "vieja"
+    },
+    {
+      "numero": 33,
+      "pregunta": "¿Cuál de las cinco proposiciones indica el significado del proverbio \"Haz bien y guárdate\"?",
+      "opciones": [
+        "El bien ha de hacerse desinteresadamente.",
+        "Nunca se hace el bien sin ningún provecho.",
+        "Hay que obrar bien y no publicarlo.",
+        "Hay que hacer el bien al enemigo.",
+        "Los ingratos pagan con malas obras el bien que se les hace."
+      ],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "Hay que obrar bien y no publicarlo."
+    },
+    {
+      "numero": 34,
+      "pregunta": "¿Cuál de las cinco proposiciones explica el proverbio \"Haz bien y no mires a quien\"?",
+      "opciones": [
+        "El bien ha de hacerse desinteresadamente.",
+        "Nunca se hace el bien sin ningún provecho.",
+        "Hay que obrar bien y no publicarlo.",
+        "Hay que hacer el bien al enemigo.",
+        "Los ingratos pagan con malas obras el bien que se les hace."
+      ],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "El bien ha de hacerse desinteresadamente."
+    },
+    {
+      "numero": 35,
+      "pregunta": "¿Cuál de las cinco proposiciones explica el proverbio \"Haz buena harina y no toques bocina\"?",
+      "opciones": [
+        "El bien ha de hacerse desinteresadamente.",
+        "Nunca se hace el bien sin ningún provecho.",
+        "Hay que obrar bien y no publicarlo.",
+        "Hay que hacer el bien al enemigo.",
+        "Los ingratos pagan con malas obras el bien que se les hace."
+      ],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "Hay que obrar bien y no publicarlo."
+    },
+    {
+      "numero": 36,
+      "pregunta": "Cuando un individuo enajena su propiedad es porque:",
+      "opciones": ["la compra", "la vende", "la devuelve", "la presta", "la regala"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "la vende"
+    },
+    {
+      "numero": 37,
+      "pregunta": "¿Qué se relaciona con enfermedad, como cuidado se relaciona con accidente?",
+      "opciones": ["doctor", "cirugía", "medicina", "hospital", "salubridad"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "medicina"
+    },
+    {
+      "numero": 38,
+      "pregunta": "De estas cinco cosas, cuatro son parecidas en algo. ¿Cuál es la que no pertenece a ese grupo?",
+      "opciones": ["contrabando", "robo", "calma", "estafa", "venta"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "calma"
+    },
+    {
+      "numero": 39,
+      "pregunta": "Si diez cajas llenas de manzanas pesan cuatrocientos kilogramos, ¿Cuánto pesan sólo las manzanas, si cada caja pesa 4 kilogramos vacía?",
+      "opciones": ["380", "370", "350", "360", "355"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "360"
+    },
+    {
+      "numero": 40,
+      "pregunta": "Lo opuesto de esperanza es:",
+      "opciones": ["fe", "desaliento", "tristeza", "desgracia", "odio"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "desaliento"
+    },
+    {
+      "numero": 41,
+      "pregunta": "Si todas las letras que ocupan números impares se cruzaran, ¿Cuál sería la décima letra no cruzada? ABCDEFGHIJKLMN ÑOPQRSTUVWXYZ",
+      "opciones": ["P", "N", "O", "S", "T"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "P"
+    },
+    {
+      "numero": 42,
+      "pregunta": "¿Qué letra en la palabra METACRÓMICO, ocupa el mismo lugar, contando desde el principio en dicha palabra y en el alfabeto?",
+      "opciones": ["H", "K", "O", "G", "J"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "O"
+    },
+    {
+      "numero": 43,
+      "pregunta": "Lo que la gente dice de una persona constituye su:",
+      "opciones": ["carácter", "murmuración", "reputación", "disposición", "personalidad"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "reputación"
+    },
+    {
+      "numero": 44,
+      "pregunta": "Si 2 1/2 metros de tela cuestan 30 pesos, ¿Cuánto costarán 10 metros?",
+      "opciones": ["120", "300", "220", "140", "60"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "120"
+    },
+    {
+      "numero": 45,
+      "pregunta": "Si las palabras siguientes se ordenaran para formar una oración, ¿con qué letra comenzaría la tercera palabra de dicha proposición? BAJO, CONTRARIO, SIGNIFICA, QUE, LO, ALTO",
+      "opciones": ["B", "L", "Q", "C", "A"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "Q"
+    },
+    {
+      "numero": 46,
+      "pregunta": "Si las primeras dos proposiciones son verdaderas la tercera es: 1. Jorge es mayor que Paco. 2. Jaime es mayor que Jorge. 3. Paco es menor que Jaime.",
+      "opciones": ["verdadera", "falsa", "dudosa"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "verdadera"
+    },
+    {
+      "numero": 47,
+      "pregunta": "Suponiendo que en la palabra CONSTITUCIONAL, la primera y la segunda letras se intercambiaran y también la 3a con la 4a y la 5a con la 6a, etc. ¿Cuál sería la doceava letra?, contando de izquierda a derecha.",
+      "opciones": ["A", "L", "N"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "L"
+    },
+    {
+      "numero": 48,
+      "pregunta": "Un número está equivocado en la siguiente serie, ¿Cuál debe ir en su lugar? 0-1-3-6-10-15-21-28-34",
+      "opciones": ["28", "9", "34", "36", "12"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "36"
+    },
+    {
+      "numero": 49,
+      "pregunta": "Si cuatro y medio metros de tela cuestan 90 pesos, ¿Cuántos pesos costarán 2 1/2 metros?",
+      "opciones": ["80", "55", "60", "45", "50"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "50"
+    },
+    {
+      "numero": 50,
+      "pregunta": "La influencia de un hombre en la comunidad en que vive debe depender de su:",
+      "opciones": ["fortuna", "dignidad", "sabiduría", "ambición", "poder político"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "sabiduría"
+    },
+    {
+      "numero": 51,
+      "pregunta": "¿Cuál de las siguientes palabras tiene la misma relación con \"poco\", que ordinario tiene con respecto a \"excepcional\"?",
+      "opciones": ["nada", "algo", "mucho", "menos", "más"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "mucho"
+    },
+    {
+      "numero": 52,
+      "pregunta": "Lo opuesto a traidor es:",
+      "opciones": ["amistoso", "valiente", "sabio", "cobarde", "leal"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "leal"
+    },
+    {
+      "numero": 53,
+      "pregunta": "¿Cuál de las cinco siguientes palabras tiene menos relación con las otras cuatro?",
+      "opciones": ["bueno", "ancho", "rojo", "camino", "espeso"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "espeso"
+    },
+    {
+      "numero": 54,
+      "pregunta": "Si las dos primeras proposiciones son verdaderas, la tercera es: 1. Algunos de los amigos de López son cordobeses. 2. Algunos de los amigos de López son dentistas. 3. Algunos de los amigos de López son dentistas cordobeses.",
+      "opciones": ["verdadera", "falsa", "no se sabe"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "no se sabe"
+    },
+    {
+      "numero": 55,
+      "pregunta": "¿Cuántas de las siguientes palabras pueden formarse con la palabra MURCIELAGO usando las letras cualquier número de veces? RAMIRO, MARIANELA, ABRUMO, AMORES, GRANO, MADURO, CLAMORES, MOCHILA, GLORIA, RUMIARÍA, GIMIERAN, GRUMETE, GLORIOSO, GRACIOSÍSIMO.",
+      "opciones": ["1", "3", "5", "6", "4"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "3"
+    },
+    {
+      "numero": 56,
+      "pregunta": "La afirmación de que la luna es un queso es:",
+      "opciones": ["absurda", "dudosa", "imposible", "injusta", "falaz"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "absurda"
+    },
+    {
+      "numero": 57,
+      "pregunta": "De las cinco cosas que se nombran enseguida, cuatro se parecen. ¿Cuál no se relaciona con las otras?",
+      "opciones": ["alquitrán", "tiza", "hollín", "carbón", "ébano"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "tiza"
+    },
+    {
+      "numero": 58,
+      "pregunta": "¿Qué cosa se relaciona con un cubo, como un círculo con un cuadro?",
+      "opciones": ["circunferencia", "esfera", "ángulos", "sólido", "espesor"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "esfera"
+    },
+    {
+      "numero": 59,
+      "pregunta": "Si las palabras siguientes se vieran por reflexión en un espejo lateral, ¿Cuál de ellas se vería exactamente igual a como está escrita?",
+      "opciones": ["ORURO", "OMOR", "ANCA", "SOMOS", "AMA"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "AMA"
+    },
+    {
+      "numero": 60,
+      "pregunta": "Si una cinta de 24 cm de largo, mide 22 cm después de lavada (por encogerse), ¿Qué longitud tendrá una cinta de 36 cm después de lavada?",
+      "opciones": ["26", "31", "33", "30", "34"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "33"
+    },
+    {
+      "numero": 61,
+      "pregunta": "¿Cuál de las siguientes palabras indican un rasgo de carácter?",
+      "opciones": ["personalidad", "estima", "amor", "generosidad", "salud"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "salud"
+    },
+    {
+      "numero": 62,
+      "pregunta": "Encuentre dos letras en la palabra DOMINGO, que tienen tantas letras entre ambas como las mismas letras tienen en el alfabeto. ABCDEFGHIJKL MNNOPQRSTUVWXYZ",
+      "opciones": ["N,O", "D,M", "I,G", "0,1", "M,N"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "N,O"
+    },
+    {
+      "numero": 63,
+      "pregunta": "Revolución se relaciona con evolución como aviación se relaciona con:",
+      "opciones": ["pájaros", "girar", "caminar", "alas", "estar parado."],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "alas"
+    },
+    {
+      "numero": 64,
+      "pregunta": "En la siguiente serie hay un número equivocado. ¿Con qué otro debe remplazarse? 1-3-9-27-81-108",
+      "opciones": ["245", "241", "243", "220", "200"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "243"
+    },
+    {
+      "numero": 65,
+      "pregunta": "Si Juan puede andar en bicicleta 30 metros, mientras Pedro anda 20, ¿Cuántos puede andar Juan mientras Pedro anda 30 metros?",
+      "opciones": ["50", "45", "15", "60", "30"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "45"
+    },
+    {
+      "numero": 66,
+      "pregunta": "En la siguiente serie cuente cada N que está seguida inmediatamente por una O, siempre que la O no esté seguida por una T. Diga cuántas N en estas condiciones se encuentran. NONTOMNOTMONOO NQMNN",
+      "opciones": ["8", "2", "6", "4", "5"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "4"
+    },
+    {
+      "numero": 67,
+      "pregunta": "Se dice que un hombre adverso a los cambios es:",
+      "opciones": ["democrático", "extremista", "conservador", "anarquista", "liberal"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "conservador"
+    },
+    {
+      "numero": 68,
+      "pregunta": "Indique la letra que es la cuarta a la izquierda de la letra que está a la mitad del camino entre la O y la S en el alfabeto. A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z ",
+      "opciones": ["N", "P", "R", "M"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "N"
+    },
+    {
+      "numero": 69,
+      "pregunta": "¿Qué número está en el espacio que pertenece al rectángulo y al triángulo pero no al círculo?",
+      "opciones": ["3", "8", "12", "7", "10"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "10"
+    },
+    {
+      "numero": 70,
+      "pregunta": "¿Qué número está en las mismas figuras geométricas que el número 8?",
+      "opciones": ["6", "5", "7", "3", "9"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "6"
+    },
+    {
+      "numero": 71,
+      "pregunta": "¿Cuántos espacios hay que están sólo en dos de las figuras geométricas?",
+      "opciones": ["10", "6", "5", "7", "8"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "5"
+    },
+    {
+      "numero": 72,
+      "pregunta": "Una superficie se relaciona con una línea, como una línea se relaciona con:",
+      "opciones": ["sólido", "plano", "curva", "punto", "hilo"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "sólido"
+    },
+    {
+      "numero": 73,
+      "pregunta": "Si las proposiciones que siguen son verdaderas, la tercera es: 1. No se puede llegar a ser buen violinista sin mucha práctica. 2. Carlos practica mucho en el violín. 3. Carlos será un gran violinista.",
+      "opciones": ["verdadera", "falsa", "no se sabe"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "no se sabe"
+    },
+    {
+      "numero": 74,
+      "pregunta": "Si las siguientes palabras se ordenaran a modo de formar una oración con sentido, ¿con qué letra terminaría la última palabra? SINCERIDAD, LA, RASGOS, CORTESIA, LA, CARÁCTER, DE, DESEABLES, Y, SON",
+      "opciones": ["D", "R", "S", "C", "L"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "S"
+    },
+    {
+      "numero": 75,
+      "pregunta": "Se dice que un hombre que al tomar una decisión está influenciado por opiniones preconcebidas es:",
+      "opciones": ["influyente", "sujeto a prejuicios", "hipócrita", "decidido", "imparcial"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "influyente"
+    },
+    {
+      "numero": 76,
+      "pregunta": "En una confitería se sirve una mezcla de dos partes de crema y tres de leche, ¿Cuántos litros de crema serán necesarios para hacer 15 litros de mezcla?",
+      "opciones": ["9", "5", "7", "6", "8"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "5"
+    },
+    {
+      "numero": 77,
+      "pregunta": "¿Qué cosa tiene la misma relación con la sangre, que la física con el movimiento?",
+      "opciones": ["temperatura", "venas", "cuerpo", "fisiología", "geografía"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "venas"
+    },
+    {
+      "numero": 78,
+      "pregunta": "Un juicio cuyo significado no es definido se dice que es:",
+      "opciones": ["erróneo", "dudoso", "ambiguo", "desfigurado", "hipotético"],
+      "puntuacion": "1/1",
+      "respuesta_correcta": "ambiguo"
+    },
+    {
+      "numero": 79,
+      "pregunta": "Si se corta un alambre de 20 cm de largo de modo que un pedazo sea 2/3 del otro, ¿Cuántos centímetros más corto será el menor?",
+      "opciones": ["3", "5", "4", "7", "6"],
+      "puntuacion": "0/1",
+      "respuesta_correcta": "6"
+    }
+  ]
+}

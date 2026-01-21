@@ -1,0 +1,362 @@
+[
+    {
+        "pregunta": "ME DA MAYOR COMODIDAD Y SERENIDAD EL TRABAJAR CON INFORMACIÓN QUE YO MISMO ESTRUCTURE",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME CUESTA ADAPTARME CUANDO ME PRESENTAN UN NUEVO GRUPO DE AMIGOS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "PREFIERO NO CAMBIAR MI FORMA DE VIVIR Y QUEDARME COMO ESTOY AHORA",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "SUELO PASAR INADVERTIDO CUANDO ESTOY EN REUNIONES O EVENTOS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO ME GUSTA CORRER RIESGOS",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "INTENTO EVITAR LOS PROBLEMAS CON MI FAMILIA Y CONOCIDOS",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "MANTENGO FIRME MIS IDEAS Y PENSAMIENTOS SIN CAMBIAR",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "ES DIFÍCIL PARA MI DECIDIR EN MOMENTOS DE RIESGO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "CUANDO SE PRESENTAN CONFLICTOS PREFIERO CALLARME",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME DEMORO RESPONDER ANTE SITUACIONES DE PRESIÓN O MUCHO TRABAJO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO ME SIENTO CÓMODO TRABAJANDO EN UN LUGAR ADAPTADO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO ME GUSTA QUE CAMBIEN LAS COSAS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "PREFIERO ABANDONAR UNA LABOR SI CAMBIAN MUCHO LAS REGLAS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "PREFIERO NO INTERACTUAR CON PERSONAS EXTRAÑAS",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "ME PONE ANSIOSO PENSAR QUE LAS COSAS CAMBIARAN",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "Acostumbrarme al cambio de jefe me incomoda",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME CUESTA ADAPTARME A OTRAS CULTURAS DISTINTAS A LA MÍA",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "Modificar mis horarios me alteran",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "CAMBIAR MIS HÁBITOS DE ESTUDIO ME ALTERAN",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO ME GUSTAN LAS CRÍTICAS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "CUANDO QUIERO CONSEGUIR ALGO NO ME IMPORTAN LOS DEMÁS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO ME INCOMODO CUANDO ALGUIEN ME CORRIGE",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "NO ME GUSTA MUDARME DE MUNICIPIO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO ME COMPLACE SABER QUE SE CUMPLEN LAS REGLAS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO ME GUSTA ADAPTARME A LOS CAMBIOS EN MI CASA",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "LAS PERSONAS QUE ME CONOCEN PIENSAN QUE PREFIERO HACER LAS COSAS A MI MANERA",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "LOS GUSTOS HACEN QUE MUCHAS COSAS NO CAMBIEN A PESAR DE QUE TODO CAMBIA CON EL TIEMPO",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "NO ME GUSTA CONOCER PERSONAS DE OTROS PAISES",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME RESULTA COMPLICADO ELEGIR ENTRE UNA U OTRA ALTERNATIVA",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO HE CAMBIADO MUCHAS COSAS EN LOS ÚLTIMOS MESES",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "ME PARECE IMPOSIBLE ADAPTARME A UN TRABAJO DE DECISIONES RÁPIDAS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ES POSITIVO PARA LAS INSTITUCIONES CONTAR CON NORMAS INFLEXIBLES",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "CUANDO CAMBIAN LA FORMA DE ENSEÑANZA SIENTO QUE DEMORO MÁS EN CAPTAR",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME GUSTARÍA QUE LAS COSAS SE QUEDEN COMO ESTÁN POR SIEMPRE",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "No puedo tolerar hacer cambios radicales en mi vida",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME CUESTA TRABAJO TENER UN NUEVO CÍRCULO DE AMIGOS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "CREO QUE NO ME GUSTARÍA MUDARME A OTRA PROVINCIA",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "SOY INTOLERANTE ANTE LOS CAMBIOS DE ÚLTIMO MINUTO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "HAGO LAS COSAS SIEMPRE IGUAL",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME DOMINAN MIS MIEDOS",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "SIENTO MIEDO DE LOS ESPACIOS ABIERTO O EN LA CALLE",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME SIENTO BAJO DE ENERGÍA O DECAÍDO CONSTANTEMENTE",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "HE TENIDO PENSAMIENTO SUICIDA, O IDEAS DE ACABAR CON MI VIDA EN EL ÚLTIMO AÑO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ESCUCHO VOCES QUE OTRAS PERSONAS NO OYEN",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "TENGO LA IDEA DE QUE UNO NO SE PUEDE CONFIAR DE LA GENTE",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME FALTA ΑΡΕΤΙΤΟ",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO LLORO CON FACILIDAD",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "SIENTO TIMIDEZ O INCOMODIDAD ANTE EL SEXO OPUESTO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "TENGO LA SENSACIÓN DE ESTAR ATRAPADO O COMO ENCERRADO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "TENGO ARREBATOS DE CÓLERA O ATAQUES DE FURIA QUE NO LOGRO CONTROLAR",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "TENGO MIEDO A SALIR DE CASA SOLO",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "ME CULPO A MI MISMO DE TODO LO QUE PASA",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "NO ME SIENTO TRISTE",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "ALGUNAS VECES SE SIENTE FASTIDIADO POR PALABRAS O PENSAMIENTOS INÚTILES QUE VIENEN A SU MENTE UNA Y OTRA VEZ?",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "¿SUS GUSTOS O INTERESES CAMBIAN RÁPIDAMENTE DE UNA COSA A OTRA?",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "¿SE SIENTE A VECES DESBORDANTE DE ENERGÍA Y OTRAS VECES EN CAMBIO SIN GANAS DE HACER NADA?",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "¿A VECES SE SIENTE DESDICHADO SIN QUE EXISTA UNA BUENA RAZÓN PARA SENTIRSE ASÍ?",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "¿PIENSA POCO EN SUS FRACASOS DESPUÉS QUE ELLOS HAN PASADO?",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "¿USTED SUEÑA DESPIERTO CON MUCHA FRECUENCIA?",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "¿Hay momentos en los que le parece muy oscuro y difícil el destino?",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "USTED CONECTA CON LA NATURALEZA",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "SI SU FAMILIA TUVIERA PROBLEMAS LA APOYARIA",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "¿Casi siempre se siente fuerte y saludable?",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La honestidad es la mejor política en todas las situaciones.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La libertad es un derecho fundamental que debe ser protegido.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La igualdad es un principio moral fundamental.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La compasión es un valor no importante en la sociedad.",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "La justicia es un valor fundamental en la sociedad.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La responsabilidad es un valor fundamental en la vida personal y profesional.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La honestidad es más importante que la lealtad.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La justicia es más importante que la misericordia.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La compasión hacia los demás es un deber moral.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La justicia social es un objetivo alcanzable.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La responsabilidad es un valor no fundamental en el trabajo.",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "La empatía es esencial para el éxito en el trabajo en equipo.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La honestidad puede ser sacrificada por el bien de la institución",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "La empatía es una debilidad en el lugar de trabajo.",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "La honestidad es el mayor valor a largo plazo.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La integridad es un valor que se puede adaptar a las circunstancias.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La justicia es un principio fundamental en la toma de decisiones.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La integridad es un valor fundamental en la vida personal y profesional.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La honestidad no es la base de la confianza.",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "La justicia es un valor universal.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "es bueno recibir un regalo por tu labor",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "sí un amigo denuncia a otro por un delito que el hizo, tu estas",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "es bueno que un compañero robe en un operativo",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "un ciudadano te debe de dar dinero para que lo dejes ir por un delito",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    },
+    {
+        "pregunta": "La integridad es un valor que se debe defender en todas las situaciones.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La tolerancia es un valor importante en la sociedad.",
+        "respuesta_correcta": "totalmente de acuerdo"
+    },
+    {
+        "pregunta": "La lastima hacia los demás es un deber moral.",
+        "respuesta_correcta": "totalmente en desacuerdo"
+    }
+]

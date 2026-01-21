@@ -1,0 +1,556 @@
+{
+  "informacion_del_examen": {
+    "nombre": "EXAMEN AXIOLOGICO SEDENA Y GN",
+    "puntuacion_obtenida": "82/91",
+    "tiempo_limite": "30 MINUTOS"
+  },
+  "opciones_estandar": [
+    "totalmente en desacuerdo",
+    "en desacuerdo",
+    "neutral",
+    "de acuerdo",
+    "totalmente de acuerdo"
+  ],
+  "preguntas_y_respuestas": [
+    {
+      "pregunta": "ME DA MAYOR COMODIDAD Y SERENIDAD EL TRABAJAR CON INFORMACIÓN QUE YO MISMO ESTRUCTURE",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME CUESTA ADAPTARME CUANDO ME PRESENTAN UN NUEVO GRUPO DE AMIGOS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "PREFIERO NO CAMBIAR MI FORMA DE VIVIR Y QUEDARME COMO ESTOY AHORA",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "SUELO PASAR INADVERTIDO CUANDO ESTOY EN REUNIONES O EVENTOS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME GUSTA CORRER RIESGOS",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "INTENTO EVITAR LOS PROBLEMAS CON MI FAMILIA Y CONOCIDOS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "0/1"
+    },
+    {
+      "pregunta": "MANTENGO FIRME MIS IDEAS Y PENSAMIENTOS SIN CAMBIAR",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ES DIFÍCIL PARA MI DECIDIR EN MOMENTOS DE RIESGO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "CUANDO SE PRESENTAN CONFLICTOS PREFIERO CALLARME",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME DEMORO RESPONDER ANTE SITUACIONES DE PRESIÓN O MUCHO TRABAJO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME SIENTO CÓMODO TRABAJANDO EN UN LUGAR ADAPTADO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME GUSTA QUE CAMBIEN LAS COSAS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "PREFIERO ABANDONAR UNA LABOR SI CAMBIAN MUCHO LAS REGLAS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "PREFIERO NO INTERACTUAR CON PERSONAS EXTRAÑAS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "0/1"
+    },
+    {
+      "pregunta": "ME PONE ANSIOSO PENSAR QUE LAS COSAS CAMBIARAN",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "Acostumbrarme al cambio de jefe me incomoda",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME CUESTA ADAPTARME A OTRAS CULTURAS DISTINTAS A LA MÍA",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "Modificar mis horarios me alteran",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "CAMBIAR MIS HÁBITOS DE ESTUDIO ME ALTERAN",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME GUSTAN LAS CRÍTICAS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "CUANDO QUIERO CONSEGUIR ALGO NO ME IMPORTAN LOS DEMÁS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME INCOMODO CUANDO ALGUIEN ME CORRIGE",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME GUSTA MUDARME DE MUNICIPIO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME COMPLACE SABER QUE SE CUMPLEN LAS REGLAS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME GUSTA ADAPTARME A LOS CAMBIOS EN MI CASA",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "LAS PERSONAS QUE ME CONOCEN PIENSAN QUE PREFIERO HACER LAS COSAS A MI MANERA",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "LOS GUSTOS HACEN QUE MUCHAS COSAS NO CAMBIEN A PESAR DE QUE TODO CAMBIA CON EL TIEMPO",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO ME GUSTA CONOCER PERSONAS DE OTROS PAISES",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME RESULTA COMPLICADO ELEGIR ENTRE UNA U OTRA ALTERNATIVA",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO HE CAMBIADO MUCHAS COSAS EN LOS ÚLTIMOS MESES",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "0/1"
+    },
+    {
+      "pregunta": "ME PARECE IMPOSIBLE ADAPTARME A UN TRABAJO DE DECISIONES RÁPIDAS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ES POSITIVO PARA LAS INSTITUCIONES CONTAR CON NORMAS INFLEXIBLES",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "CUANDO CAMBIAN LA FORMA DE ENSEÑANZA SIENTO QUE DEMORO MÁS EN CAPTAR",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME GUSTARÍA QUE LAS COSAS SE QUEDEN COMO ESTÁN POR SIEMPRE",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "No puedo tolerar hacer cambios radicales en mi vida",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME CUESTA TRABAJO TENER UN NUEVO CÍRCULO DE AMIGOS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "CREO QUE NO ME GUSTARÍA MUDARME A OTRA PROVINCIA",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "0/1"
+    },
+    {
+      "pregunta": "SOY INTOLERANTE ANTE LOS CAMBIOS DE ÚLTIMO MINUTO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "HAGO LAS COSAS SIEMPRE IGUAL",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME DOMINAN MIS MIEDOS",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "SIENTO MIEDO DE LOS ESPACIOS ABIERTO O EN LA CALLE",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME SIENTO BAJO DE ENERGÍA O DECAÍDO CONSTANTEMENTE",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "HE TENIDO PENSAMIENTO SUICIDA, O IDEAS DE ACABAR CON MI VIDA EN EL ÚLTIMO AÑO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ESCUCHO VOCES QUE OTRAS PERSONAS NO OYEN",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "TENGO LA IDEA DE QUE UNO NO SE PUEDE CONFIAR DE LA GENTE",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME FALTA ΑΡΕΤΙΤΟ",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "NO LLORO CON FACILIDAD",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "SIENTO TIMIDEZ O INCOMODIDAD ANTE EL SEXO OPUESTO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "TENGO LA SENSACIÓN DE ESTAR ATRAPADO O COMO ENCERRADO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "TENGO ARREBATOS DE CÓLERA O ATAQUES DE FURIA QUE NO LOGRO CONTROLAR",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "TENGO MIEDO A SALIR DE CASA SOLO",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ME CULPO A MI MISMO DE TODO LO QUE PASA",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "0/1"
+    },
+    {
+      "pregunta": "NO ME SIENTO TRISTE",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "ALGUNAS VECES SE SIENTE FASTIDIADO POR PALABRAS O PENSAMIENTOS INÚTILES QUE VIENEN A SU MENTE UNA Y OTRA VEZ?",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "¿SUS GUSTOS O INTERESES CAMBIAN RÁPIDAMENTE DE UNA COSA A OTRA?",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "¿SE SIENTE A VECES DESBORDANTE DE ENERGÍA Y OTRAS VECES EN CAMBIO SIN GANAS DE HACER NADA?",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "¿A VECES SE SIENTE DESDICHADO SIN QUE EXISTA UNA BUENA RAZÓN PARA SENTIRSE ASÍ?",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "¿PIENSA POCO EN SUS FRACASOS DESPUÉS QUE ELLOS HAN PASADO?",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "0/1"
+    },
+    {
+      "pregunta": "¿USTED SUEÑA DESPIERTO CON MUCHA FRECUENCIA?",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "¿Hay momentos en los que le parece muy oscuro y difícil el destino?",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "USTED CONECTA CON LA NATURALEZA",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "SI SU FAMILIA TUVIERA PROBLEMAS LA APOYARIA",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "¿Casi siempre se siente fuerte y saludable?",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La honestidad es la mejor política en todas las situaciones.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La libertad es un derecho fundamental que debe ser protegido.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La igualdad es un principio moral fundamental.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La compasión es un valor no importante en la sociedad.",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La justicia es un valor fundamental en la sociedad.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La responsabilidad es un valor fundamental en la vida personal y profesional.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La honestidad es más importante que la lealtad.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La justicia es más importante que la misericordia.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La compasión hacia los demás es un deber moral.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La justicia social es un objetivo alcanzable.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La responsabilidad es un valor no fundamental en el trabajo.",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La empatía es esencial para el éxito en el trabajo en equipo.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La honestidad puede ser sacrificada por el bien de la institución",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La empatía es una debilidad en el lugar de trabajo.",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La honestidad es el mayor valor a largo plazo.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La integridad es un valor que se puede adaptar a las circunstancias.",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "0/1"
+    },
+    {
+      "pregunta": "La justicia es un principio fundamental en la toma de decisiones.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La integridad es un valor fundamental en la vida personal y profesional.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La honestidad no es la base de la confianza.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "0/1"
+    },
+    {
+      "pregunta": "La justicia es un valor universal.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "es bueno recibir un regalo por tu labor",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "sí un amigo denuncia a otro por un delito que el hizo, tu estas",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "es bueno que un compañero robe en un operativo",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "un ciudadano te debe de dar dinero para que lo dejes ir por un delito",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La integridad es un valor que se debe defender en todas las situaciones.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La tolerancia es un valor importante en la sociedad.",
+      "seleccionada": "totalmente de acuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    },
+    {
+      "pregunta": "La lastima hacia los demás es un deber moral.",
+      "seleccionada": "totalmente en desacuerdo",
+      "opciones": "Ver lista estándar",
+      "puntaje": "1/1"
+    }
+  ]
+}

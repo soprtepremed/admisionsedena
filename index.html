@@ -1,0 +1,2109 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Examen Axiológico - SEDENA y GN</title>
+    <style>
+        :root {
+            /* Variables Dinámicas (Tema Base: Militar) */
+            --primary: #4b5320;
+            --secondary: #2c3e50;
+            --bg-body: #e9ecef;
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --light: #f4f6f7;
+            --accent: #d35400;
+            --success: #27ae60;
+            --error: #c0392b;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        /* TEMA OSCURO (Tactical Ops) */
+        [data-theme="dark"] {
+            --primary: #2ecc71;
+            /* Verde neón táctico */
+            --secondary: #34495e;
+            --bg-body: #1a1a1a;
+            --bg-card: #2d2d2d;
+            --text-main: #ecf0f1;
+            --text-secondary: #bdc3c7;
+            --light: #3d3d3d;
+            --accent: #e67e22;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* TEMA AZUL (Aéreo) */
+        [data-theme="blue"] {
+            --primary: #0056b3;
+            --secondary: #1abc9c;
+            --bg-body: #f0f4f8;
+            --bg-card: #ffffff;
+            --text-main: #2c3e50;
+            --text-secondary: #7f8c8d;
+            --light: #e8f4f8;
+            --accent: #f1c40f;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            background-color: var(--bg-card);
+            /* ... resto igual ... */
+            max-width: 800px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px var(--shadow);
+            text-align: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* LOGIN STYLES */
+        .login-container {
+            max-width: 400px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--text-secondary);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            background: var(--light);
+            color: var(--text-main);
+            font-size: 1rem;
+            box-sizing: border-box;
+            /* Importante para padding */
+        }
+
+        /* SIDEBAR STYLES */
+        .settings-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px var(--shadow);
+            z-index: 1000;
+            display: none;
+            /* Se muestra al loguearse */
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .settings-btn:hover {
+            transform: rotate(90deg);
+        }
+
+
+
+        .music-btn {
+            position: fixed;
+            top: 20px;
+            right: 80px;
+            /* A la izquierda del de ajustes */
+            background: var(--secondary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px var(--shadow);
+            z-index: 1000;
+            display: none;
+            /* Se muestra al loguearse */
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s;
+        }
+
+        .music-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .music-btn.playing {
+            background: var(--success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(39, 174, 96, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(39, 174, 96, 0);
+            }
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            /* Oculto */
+            width: 280px;
+            height: 100%;
+            background: var(--bg-card);
+            box-shadow: -5px 0 15px var(--shadow);
+            padding: 20px;
+            z-index: 1001;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--light);
+            padding-bottom: 15px;
+        }
+
+        .close-sidebar {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+        }
+
+        .theme-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background: var(--light);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .theme-option:hover,
+        .theme-option.active {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .color-preview {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 15px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+
+        /* Menu Styles */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .exam-card {
+            background-color: var(--light);
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .exam-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .exam-card h3 {
+            color: var(--secondary);
+            margin-bottom: 10px;
+        }
+
+        .exam-card p {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        header h1 {
+            color: var(--primary);
+            font-size: 2em;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+        }
+
+        header p {
+            color: var(--secondary);
+            margin-bottom: 30px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .question-card {
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .question-image {
+            max-width: 100%;
+            max-height: 300px;
+            margin: 0 auto 20px;
+            display: block;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .options-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .option-btn {
+            background-color: var(--light);
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1em;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .option-btn:hover {
+            background-color: #dde1e3;
+            border-color: var(--primary);
+        }
+
+        .option-btn.selected {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .btn-next {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-next:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .btn-home {
+            background-color: var(--secondary);
+            color: white;
+            margin-top: 20px;
+        }
+
+        /* Pantallas */
+        .screen {
+            display: none;
+            /* Ocultar todo por defecto */
+        }
+
+        .screen.active {
+            display: block;
+            /* Mostrar solo la activa */
+        }
+
+        /* Pagina Resultados */
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary) 0%, #ddd 0%);
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            font-weight: bold;
+            color: var(--primary);
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            background-color: white;
+            border-radius: 50%;
+        }
+
+        .score-text {
+            position: absolute;
+            z-index: 2;
+        }
+
+        .review-list {
+            text-align: left;
+            margin-top: 30px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            padding: 15px;
+        }
+
+        .review-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .review-item.error {
+            background-color: #ffebee;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+        }
+
+        .status-correct {
+            background-color: var(--success);
+        }
+
+        .status-incorrect {
+            background-color: var(--error);
+        }
+
+        /* PANTALLA DE DESCANSO (BREAK) */
+        .break-container {
+            display: none;
+            /* Oculto por defecto */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 0.5s ease;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            z-index: 100;
+        }
+
+        .break-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .break-title {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .break-text {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .resume-btn {
+            background: linear-gradient(135deg, var(--secondary), #2ecc71);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
+        }
+
+        .resume-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.6);
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR DE CONFIGURACIÓN -->
+    <button class="settings-btn" id="settings-toggle" onclick="toggleSidebar()">⚙️</button>
+    <button class="music-btn" id="music-toggle" onclick="toggleMusic()">🎵</button>
+
+    <audio id="bg-music">
+        <!-- La fuente se gestionará dinámicamente con JavaScript -->
+    </audio>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3 style="margin:0; color:var(--text-main)">🎨 Diseño</h3>
+            <button class="close-sidebar" onclick="toggleSidebar()">×</button>
+        </div>
+
+        <div class="theme-option" onclick="setTheme('default')">
+            <div class="color-preview" style="background: #4b5320;"></div>
+            <span style="color:var(--text-main)">Militar (Original)</span>
+        </div>
+
+        <div class="theme-option" onclick="setTheme('dark')">
+            <div class="color-preview" style="background: #2ecc71; border: 1px solid #fff;"></div>
+            <span style="color:var(--text-main)">Tactical Ops (Oscuro)</span>
+        </div>
+
+        <div class="theme-option" onclick="setTheme('blue')">
+            <div class="color-preview" style="background: #0056b3;"></div>
+            <span style="color:var(--text-main)">Fuerza Aérea (Azul)</span>
+        </div>
+
+        <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--light);">
+            <button class="btn btn-home" onclick="logout()" style="width: 100%; background: var(--error);">Cerrar
+                Sesión</button>
+        </div>
+    </div>
+
+
+    <!-- Pantalla Login -->
+    <div class="container login-container screen active" id="login-screen">
+        <div style="font-size: 4rem; margin-bottom: 20px;">🛡️</div>
+        <header>
+            <h1>Acceso Restringido</h1>
+            <p>Portal de Simuladores - Solo Personal Autorizado</p>
+        </header>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="input-group">
+                <label>Usuario</label>
+                <input type="text" id="username" placeholder="Ingrese usuario" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <label>Contraseña</label>
+                <input type="password" id="password" placeholder="Ingrese contraseña">
+            </div>
+            <button type="submit" class="btn btn-next" style="width: 100%;">Ingresar Sistema</button>
+            <p id="login-error" style="color: var(--error); display: none; margin-top: 15px;">Usuario o contraseña
+                incorrectos</p>
+        </form>
+    </div>
+
+    <!-- Pantalla Menu Principal -->
+    <div class="container screen" id="menu-screen">
+        <header>
+            <h1>Portal de Exámenes</h1>
+            <p>Selecciona un simulador para comenzar</p>
+        </header>
+
+        <div class="menu-grid">
+            <div class="exam-card" onclick="startExam('axiologico')">
+                <h3>Examen Axiológico</h3>
+                <p>SEDENA y GN - 91 Preguntas</p>
+                <p><strong>Estado:</strong> Listo ✅</p>
+            </div>
+
+            <div class="exam-card" onclick="startExam('psicologico')">
+                <h3>Examen Psicológico</h3>
+                <p>Verdadero / Falso - 567 Preguntas</p>
+                <p><strong>Estado:</strong> Listo ✅</p>
+            </div>
+
+            <div class="exam-card" onclick="startExam('psicometrico')">
+                <h3>Examen Psicométrico</h3>
+                <p>Lógica y Matemáticas - 79 Preguntas</p>
+                <p><strong>Estado:</strong> Listo ✅</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pantalla Quiz -->
+    <div class="container screen" id="quiz-screen">
+        <header>
+            <h1 id="exam-title">Examen</h1>
+            <p>Práctica Simulador</p>
+        </header>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div class="question-card">
+            <div class="question-text" id="question">Cargando pregunta...</div>
+            <div class="options-grid" id="options">
+                <!-- Opciones se generarán aquí -->
+            </div>
+        </div>
+
+        <div class="controls">
+            <div id="counter">1 / 91</div>
+            <div>
+                <button class="btn" id="prev-btn"
+                    style="background-color: #7f8c8d; color: white; display: none;">Anterior</button>
+                <button class="btn btn-next" id="next-btn" style="display: none;">Siguiente</button>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR DE DESCANSO (Oculto inicialmente) -->
+        <div id="break-screen" class="break-container">
+            <div class="break-icon">☕</div>
+            <h2 class="break-title">¡Tiempo de Recargar Energías!</h2>
+            <p class="break-text" id="break-msg">
+                Has avanzado mucho. Tomar descansos breves ayuda a mantener tu mente fresca y concentrada.
+                <br><br>
+                <strong>Tu progreso está guardado automáticamente.</strong>
+            </p>
+            <button class="resume-btn" onclick="resumeFromBreak()">Continuar Examen 💪</button>
+        </div>
+
+        <button class="btn btn-home" onclick="goHome()">Cancelar y Salir</button>
+    </div>
+
+    <!-- Pantalla Resultados -->
+    <div class="container screen" id="results-screen">
+        <header>
+            <h1>Resultados</h1>
+            <p>Resumen de tu desempeño</p>
+        </header>
+
+        <div class="score-circle" id="score-circle">
+            <span class="score-text" id="score-text">0%</span>
+        </div>
+
+        <h2 id="feedback-msg"></h2>
+
+        <div class="review-list" id="review-list">
+            <!-- Lista de errores -->
+        </div>
+
+        <div style="margin-top: 20px;">
+            <button class="btn btn-next" onclick="restartExam()">Reintentar</button>
+            <button class="btn btn-home" onclick="goHome()">Volver al Menú</button>
+        </div>
+    </div>
+
+    <script>
+        // Configuracion inicial
+
+
+
+        // Cargar datos
+        const questions = [
+            {
+                "pregunta": "ME DA MAYOR COMODIDAD Y SERENIDAD EL TRABAJAR CON INFORMACIÓN QUE YO MISMO ESTRUCTURE",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME CUESTA ADAPTARME CUANDO ME PRESENTAN UN NUEVO GRUPO DE AMIGOS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "PREFIERO NO CAMBIAR MI FORMA DE VIVIR Y QUEDARME COMO ESTOY AHORA",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "SUELO PASAR INADVERTIDO CUANDO ESTOY EN REUNIONES O EVENTOS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO ME GUSTA CORRER RIESGOS",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "INTENTO EVITAR LOS PROBLEMAS CON MI FAMILIA Y CONOCIDOS",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "MANTENGO FIRME MIS IDEAS Y PENSAMIENTOS SIN CAMBIAR",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "ES DIFÍCIL PARA MI DECIDIR EN MOMENTOS DE RIESGO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "CUANDO SE PRESENTAN CONFLICTOS PREFIERO CALLARME",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME DEMORO RESPONDER ANTE SITUACIONES DE PRESIÓN O MUCHO TRABAJO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO ME SIENTO CÓMODO TRABAJANDO EN UN LUGAR ADAPTADO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO ME GUSTA QUE CAMBIEN LAS COSAS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "PREFIERO ABANDONAR UNA LABOR SI CAMBIAN MUCHO LAS REGLAS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "PREFIERO NO INTERACTUAR CON PERSONAS EXTRAÑAS",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "ME PONE ANSIOSO PENSAR QUE LAS COSAS CAMBIARAN",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "Acostumbrarme al cambio de jefe me incomoda",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME CUESTA ADAPTARME A OTRAS CULTURAS DISTINTAS A LA MÍA",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "Modificar mis horarios me alteran",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "CAMBIAR MIS HÁBITOS DE ESTUDIO ME ALTERAN",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO ME GUSTAN LAS CRÍTICAS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "CUANDO QUIERO CONSEGUIR ALGO NO ME IMPORTAN LOS DEMÁS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO ME INCOMODO CUANDO ALGUIEN ME CORRIGE",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "NO ME GUSTA MUDARME DE MUNICIPIO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO ME COMPLACE SABER QUE SE CUMPLEN LAS REGLAS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO ME GUSTA ADAPTARME A LOS CAMBIOS EN MI CASA",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "LAS PERSONAS QUE ME CONOCEN PIENSAN QUE PREFIERO HACER LAS COSAS A MI MANERA",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "LOS GUSTOS HACEN QUE MUCHAS COSAS NO CAMBIEN A PESAR DE QUE TODO CAMBIA CON EL TIEMPO",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "NO ME GUSTA CONOCER PERSONAS DE OTROS PAISES",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME RESULTA COMPLICADO ELEGIR ENTRE UNA U OTRA ALTERNATIVA",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO HE CAMBIADO MUCHAS COSAS EN LOS ÚLTIMOS MESES",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "ME PARECE IMPOSIBLE ADAPTARME A UN TRABAJO DE DECISIONES RÁPIDAS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ES POSITIVO PARA LAS INSTITUCIONES CONTAR CON NORMAS INFLEXIBLES",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "CUANDO CAMBIAN LA FORMA DE ENSEÑANZA SIENTO QUE DEMORO MÁS EN CAPTAR",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME GUSTARÍA QUE LAS COSAS SE QUEDEN COMO ESTÁN POR SIEMPRE",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "No puedo tolerar hacer cambios radicales en mi vida",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME CUESTA TRABAJO TENER UN NUEVO CÍRCULO DE AMIGOS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "CREO QUE NO ME GUSTARÍA MUDARME A OTRA PROVINCIA",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "SOY INTOLERANTE ANTE LOS CAMBIOS DE ÚLTIMO MINUTO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "HAGO LAS COSAS SIEMPRE IGUAL",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME DOMINAN MIS MIEDOS",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "SIENTO MIEDO DE LOS ESPACIOS ABIERTO O EN LA CALLE",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME SIENTO BAJO DE ENERGÍA O DECAÍDO CONSTANTEMENTE",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "HE TENIDO PENSAMIENTO SUICIDA, O IDEAS DE ACABAR CON MI VIDA EN EL ÚLTIMO AÑO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ESCUCHO VOCES QUE OTRAS PERSONAS NO OYEN",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "TENGO LA IDEA DE QUE UNO NO SE PUEDE CONFIAR DE LA GENTE",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME FALTA ΑΡΕΤΙΤΟ",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO LLORO CON FACILIDAD",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "SIENTO TIMIDEZ O INCOMODIDAD ANTE EL SEXO OPUESTO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "TENGO LA SENSACIÓN DE ESTAR ATRAPADO O COMO ENCERRADO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "TENGO ARREBATOS DE CÓLERA O ATAQUES DE FURIA QUE NO LOGRO CONTROLAR",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "TENGO MIEDO A SALIR DE CASA SOLO",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "ME CULPO A MI MISMO DE TODO LO QUE PASA",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "NO ME SIENTO TRISTE",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "ALGUNAS VECES SE SIENTE FASTIDIADO POR PALABRAS O PENSAMIENTOS INÚTILES QUE VIENEN A SU MENTE UNA Y OTRA VEZ?",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "¿SUS GUSTOS O INTERESES CAMBIAN RÁPIDAMENTE DE UNA COSA A OTRA?",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "¿SE SIENTE A VECES DESBORDANTE DE ENERGÍA Y OTRAS VECES EN CAMBIO SIN GANAS DE HACER NADA?",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "¿A VECES SE SIENTE DESDICHADO SIN QUE EXISTA UNA BUENA RAZÓN PARA SENTIRSE ASÍ?",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "¿PIENSA POCO EN SUS FRACASOS DESPUÉS QUE ELLOS HAN PASADO?",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "¿USTED SUEÑA DESPIERTO CON MUCHA FRECUENCIA?",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "¿Hay momentos en los que le parece muy oscuro y difícil el destino?",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "USTED CONECTA CON LA NATURALEZA",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "SI SU FAMILIA TUVIERA PROBLEMAS LA APOYARIA",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "¿Casi siempre se siente fuerte y saludable?",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La honestidad es la mejor política en todas las situaciones.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La libertad es un derecho fundamental que debe ser protegido.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La igualdad es un principio moral fundamental.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La compasión es un valor no importante en la sociedad.",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "La justicia es un valor fundamental en la sociedad.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La responsabilidad es un valor fundamental en la vida personal y profesional.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La honestidad es más importante que la lealtad.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La justicia es más importante que la misericordia.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La compasión hacia los demás es un deber moral.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La justicia social es un objetivo alcanzable.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La responsabilidad es un valor no fundamental en el trabajo.",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "La empatía es esencial para el éxito en el trabajo en equipo.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La honestidad puede ser sacrificada por el bien de la institución",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "La empatía es una debilidad en el lugar de trabajo.",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "La honestidad es el mayor valor a largo plazo.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La integridad es un valor que se puede adaptar a las circunstancias.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La justicia es un principio fundamental en la toma de decisiones.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La integridad es un valor fundamental en la vida personal y profesional.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La honestidad no es la base de la confianza.",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "La justicia es un valor universal.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "es bueno recibir un regalo por tu labor",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "sí un amigo denuncia a otro por un delito que el hizo, tu estas",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "es bueno que un compañero robe en un operativo",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "un ciudadano te debe de dar dinero para que lo dejes ir por un delito",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            },
+            {
+                "pregunta": "La integridad es un valor que se debe defender en todas las situaciones.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La tolerancia es un valor importante en la sociedad.",
+                "respuesta_correcta": "totalmente de acuerdo"
+            },
+            {
+                "pregunta": "La lastima hacia los demás es un deber moral.",
+                "respuesta_correcta": "totalmente en desacuerdo"
+            }
+        ];
+
+
+        // --- VARIABLES GLOBALES ---
+
+        // 🎵 CONFIGURACIÓN DE LISTA DE REPRODUCCIÓN
+        // Agrega aquí los nombres de tus archivos de música nuevos
+        const playlist = [
+            "musica.mp3",
+            "intanteria.mp3",
+            "paracaidistas.mp3"
+        ];
+        let currentSongIndex = 0;
+
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let optionsStandard = []; // Se definirá dinámicamente según el examen
+
+        // --- ELEMENTOS DOM ---
+        const menuScreen = document.getElementById('menu-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultsScreen = document.getElementById('results-screen');
+
+        const questionEl = document.getElementById('question');
+        const optionsEl = document.getElementById('options');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const progressEl = document.getElementById('progress');
+        const counterEl = document.getElementById('counter');
+        const examTitleEl = document.getElementById('exam-title');
+
+        // --- NAVEGACION ---
+
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        function goHome() {
+            showScreen('menu-screen');
+        }
+
+        // --- LOGICA DEL QUIZ ---
+
+
+        let rawExamenPsicologico = {
+            "informacion_general": {
+                "titulo": "Examen Psicológico Completo",
+                "total_preguntas": 567,
+                "puntuacion_final": "462/567",
+                "usuario": "qfbadolforuiz@gmail.com"
+            },
+            "preguntas": [
+                { "id": 1, "pregunta": "Me gustan las revistas de mecánica", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 2, "pregunta": "Tengo buen apetito.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 3, "pregunta": "Casi siempre me levanto por las mañanas descansado y como nuevo", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 4, "pregunta": "Creo que me gustaría trabajar como bibliotecario.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 5, "pregunta": "El ruido me despierta fácilmente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 6, "pregunta": "Mi padre es un buen hombre, (o lo fue en caso de haber fallecido).", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 7, "pregunta": "Me gusta leer artículos sobre crímenes en los periódicos.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 8, "pregunta": "Normalmente tengo bastante calientes los pies y las manos", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 9, "pregunta": "En mi vida diaria hay muchas cosas que me resultan interesantes", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 10, "pregunta": "Actualmente, tengo tanta capacidad de trabajo como antes.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 11, "pregunta": "La mayor parte del tiempo me parece tener un nudo en la garganta", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 12, "pregunta": "Mi vida sexual es satisfactoria", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 13, "pregunta": "La gente debería intentar comprender sus sueños...", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 14, "pregunta": "Me divierten las historias de detectives y de misterio.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 15, "pregunta": "Trabajo bajo una tensión muy grande.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 16, "pregunta": "Estoy seguro de que la vida es dura para mí.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 17, "pregunta": "Sufro ataques de náuseas y vómitos", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 18, "pregunta": "Cuando acepto un nuevo empleo, me gusta descubrir a quien debo caerle bien.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 19, "pregunta": "Muy rara vez sufro de constipación (sequedad de vientre)", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 20, "pregunta": "A veces he deseado muchísimo abandonar el hogar.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 21, "pregunta": "Nadie parece comprenderme.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 22, "pregunta": "A veces tengo accesos de risa y llanto que no puedo controlar.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 23, "pregunta": "A veces estoy poseído por espíritus diabólicos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 24, "pregunta": "Me gustaría ser cantante.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 25, "pregunta": "Cuando estoy en dificultades o problemas creo que lo mejor es callarme.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 26, "pregunta": "Cuando alguien me hace algún daño, siento deseos de devolvérselo...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 27, "pregunta": "Varias veces a la semana me molesta la acidez de estómago.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 28, "pregunta": "A veces siento deseos de maldecir.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 29, "pregunta": "A menudo tengo pesadillas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 30, "pregunta": "Me cuesta bastante concentrarme en una tarea o trabajo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 31, "pregunta": "He tenido muy peculiares y extrañas experiencias.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 32, "pregunta": "Raras veces me preocupo por mi salud.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 33, "pregunta": "Nunca me he visto en dificultades a causa de mi conducta sexual.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 34, "pregunta": "Durante algún tiempo, cuando era joven, participé en pequeños robos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 35, "pregunta": "Tengo tos la mayor parte del tiempo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 36, "pregunta": "A veces siento deseos de romper cosas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 37, "pregunta": "He tenido períodos de días, semanas o meses en los que no podía preocuparme...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 38, "pregunta": "Mi sueño es irregular, inquieto.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 39, "pregunta": "La mayor parte del tiempo parece dolerme la cabeza por todas partes", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 40, "pregunta": "No digo siempre la verdad.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 41, "pregunta": "Si los demás no se la hubieran tomado conmigo, hubiese tenido más éxito", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 42, "pregunta": "Mis razonamientos son ahora mejores que nunca.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 43, "pregunta": "Una vez a la semana, o más a menudo, siento calor por todo el cuerpo...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 44, "pregunta": "Tengo tan buena salud física como la mayor parte de mis amigos.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 45, "pregunta": "Prefiero hacerme el desentendido con amigos del colegio...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 46, "pregunta": "Casi nunca he sufrido de dolores en el pecho o en el corazón.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 47, "pregunta": "En muchas ocasiones me gustaría más sentarme y soñar despierto...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 48, "pregunta": "Soy una persona sociable.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 49, "pregunta": "A menudo he recibido órdenes de alguien que no sabía tanto como yo.", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 50, "pregunta": "No leo diariamente todos los artículos principales del diario.", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 51, "pregunta": "No he llevado un tipo de vida adecuado y normal.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 52, "pregunta": "A menudo algunas partes de mi cuerpo tienen sensaciones de hormigueo...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 53, "pregunta": "A mi familia no le gusta el trabajo que he elegido...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 54, "pregunta": "Algunas veces persisto en una cosa o tema hasta que los demás pierden la paciencia", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 55, "pregunta": "Me gustaría ser tan feliz como parecen ser los otros.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 56, "pregunta": "Muy raras veces siento dolor en la nuca.", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 57, "pregunta": "Pienso que una gran mayoría de gente exagera sus desgracias...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 58, "pregunta": "Tengo molestias en la boca del estómago casi a diario.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 59, "pregunta": "Cuando estoy con gente escucho cosas extrañas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 60, "pregunta": "Soy una persona importante", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 61, "pregunta": "A menudo he deseado ser mujer.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 62, "pregunta": "Mis sentimientos no son heridos con facilidad", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 63, "pregunta": "Me gusta leer novelas de amor", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 64, "pregunta": "La mayor parte del tiempo siento melancolía", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 65, "pregunta": "Se viviría mejor sin leyes", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 66, "pregunta": "Me gusta la poesía", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 67, "pregunta": "A veces hago rabiar (jugando) a los animales", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 68, "pregunta": "Creo que me gustaría el trabajo de guardabosques", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 69, "pregunta": "En una discusión o debate, me dejo vencer fácilmente", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 70, "pregunta": "En el momento actual me es difícil tener la esperanza de llegar a ser alguien", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 71, "pregunta": "A veces mi alma abandona mi cuerpo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 72, "pregunta": "Decididamente, no tengo confianza en mí mismo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 73, "pregunta": "Me gustaría ser florista", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 74, "pregunta": "Normalmente siento que vale la pena vivir la vida", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 75, "pregunta": "Se necesita discutir mucho para convencer a la mayor parte de la gente...", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 76, "pregunta": "De vez en cuando dejo para mañana lo que debería hacer hoy", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 77, "pregunta": "Le agrado a la mayor parte de la gente que me conoce", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 78, "pregunta": "No me importa que se diviertan haciéndome bromas", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 79, "pregunta": "Me gustaría ser enfermero", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 80, "pregunta": "Creo que la mayor parte de la gente mentiría para conseguir lo que busca", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 81, "pregunta": "Hago muchas cosas de las que me arrepiento luego", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 82, "pregunta": "Tengo pocas peleas con las personas de mi familia", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 83, "pregunta": "Siendo joven me echaron de clase por portarme mal", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 84, "pregunta": "A veces siento grandes deseos de hacer algo dañino o chocante", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 85, "pregunta": "Me gustaría asistir a reuniones o fiestas donde haya mucha alegría...", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 86, "pregunta": "Me he encontrado con problemas tan llenos de posibilidades que no he podido decidir", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 87, "pregunta": "Creo que las mujeres deben tener tanta libertad sexual como los hombres", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 88, "pregunta": "Las luchas más encarnizadas la tengo conmigo mismo", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 89, "pregunta": "Yo quiero mucho a mi padre", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 90, "pregunta": "Tengo pocas o ninguna molestia a causa de espasmos musculares", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 91, "pregunta": "No parece importarme lo que me suceda", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 92, "pregunta": "A veces, cuando no me siento bien, estoy irritable", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 93, "pregunta": "La mayor parte del tiempo me parece haber hecho algo malo o equivocado", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 94, "pregunta": "Soy feliz la mayor parte del tiempo", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 95, "pregunta": "Veo a mi alrededor cosas, personas o animales que otros no ven", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 96, "pregunta": "Parece como si la mayor parte del tiempo tuviera la cabeza cargada", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 97, "pregunta": "Hay algunas personas tan mandonas que me dan ganas de hacer lo contrario", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 98, "pregunta": "Alguien me la tiene jurada", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 99, "pregunta": "Nunca he hecho algo peligroso solo por el placer de hacerlo", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 100, "pregunta": "A menudo siento como si tuviera una venda puesta fuertemente en mi cabeza", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 101, "pregunta": "Algunas veces me enojo", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 102, "pregunta": "Me divierte más un juego cuando yo apuesto", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 103, "pregunta": "La mayoría de la gente es honrada por temor a ser descubierta", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 104, "pregunta": "En el colegio fui enviado al director por mala conducta", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 105, "pregunta": "Mi manera de hablar es como siempre", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 106, "pregunta": "Mis modales en la mesa no son tan correctos en casa como afuera", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 107, "pregunta": "Cualquier persona capacitada tiene probabilidades de tener éxito", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 108, "pregunta": "Me parece ser tan capaz y despierto como los que me rodean", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 109, "pregunta": "Para no perder un beneficio, la mayoría está dispuesta a cualquier cosa", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 110, "pregunta": "Tengo bastantes trastornos digestivos", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 111, "pregunta": "Me gusta el teatro y el cine", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 112, "pregunta": "Se quien es el responsable de muchos de mis problemas", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 113, "pregunta": "A veces siento ganas de robar cosas de otros", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 114, "pregunta": "Ver sangre no me da miedo ni me hace mal", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 115, "pregunta": "Frecuentemente no comprendo porque he estado tan gruñón", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 116, "pregunta": "Nunca he vomitado sangre, ni sangrado al toser", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 117, "pregunta": "No me preocupa contraer una enfermedad", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 118, "pregunta": "Me gusta recoger flores o cultivar plantas", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 119, "pregunta": "Frecuentemente encuentro necesario defender lo que es justo", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 120, "pregunta": "Nunca me he entregado a prácticas sexuales fuera de lo común", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 121, "pregunta": "A veces mi pensamiento ha ido más rápido que mis palabras", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 122, "pregunta": "Si pudiera entrar a un espectáculo sin pagar, probablemente lo haría", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 123, "pregunta": "Generalmente me pregunto que razón oculta tiene otra persona al hacerme un favor", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 124, "pregunta": "Creo que mi vida hogareña es agradable", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 125, "pregunta": "Es necesario reforzar las leyes vigentes", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 126, "pregunta": "Me hieren profundamente las críticas y los retos", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 127, "pregunta": "Me gusta cocinar", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 128, "pregunta": "Mi conducta es ampliamente controlada por las costumbres que me rodean", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 129, "pregunta": "A veces siento que verdaderamente soy un inútil", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 130, "pregunta": "Cuando era joven pertenecía a una banda", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 131, "pregunta": "Creo en el más allá", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 132, "pregunta": "Me gustaría ser soldado", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 133, "pregunta": "A veces siento deseos de tomarme a puñetazos con alguien", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 134, "pregunta": "Frecuentemente he perdido cosas por no saber decidirme a tiempo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 135, "pregunta": "Me molesta que me pidan consejo cuando estoy trabajando", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 136, "pregunta": "Solía llevar un diario personal.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 137, "pregunta": "Creo que se trama algo contra mí.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 138, "pregunta": "En un juego o partida suelo más ganar que perder.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 139, "pregunta": "Casi todas las noches me duermo con ideas molestos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 140, "pregunta": "Durante los últimos años he estado sano casi siempre.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 141, "pregunta": "Nunca he tenido un ataque o convulsión.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 142, "pregunta": "Ahora no estoy subiendo o bajando de peso.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 143, "pregunta": "Creo que me siguen.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 144, "pregunta": "Creo que frecuentemente he sido castigado sin causa", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 145, "pregunta": "Lloro con facilidad.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 146, "pregunta": "Actualmente no comprendo lo que leo con facilidad.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 147, "pregunta": "Nunca me he sentido mejor que ahora.", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 148, "pregunta": "A veces siento dolores en la parte superior de la cabeza.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 149, "pregunta": "A veces siento que tengo que hacerme daño a mi mismo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 150, "pregunta": "Me molesta que alguien se haya burlado inteligentemente de mi", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 151, "pregunta": "Me gusta conocer gente importante porque me hace sentir importante", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 152, "pregunta": "No me canso fácilmente.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 153, "pregunta": "Siento miedo cuando miro hacia abajo desde un lugar alto.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 154, "pregunta": "No me sentiría nervioso si un familiar tuviera problemas legales", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 155, "pregunta": "Solo me siento feliz cuando viajo de un lado para otro", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 156, "pregunta": "Me es indiferente lo que los demás piensen de mí.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 157, "pregunta": "Me siento incómodo haciendo una payasada en una reunión", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 158, "pregunta": "Nunca he tenido un desmayo.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 159, "pregunta": "Temo perder el control o desmayarme", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 160, "pregunta": "Me gustaba ir al colegio.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 161, "pregunta": "Frecuentemente tengo que esforzarme para no demostrar timidez", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 162, "pregunta": "Alguien ha intentado envenenarme.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 163, "pregunta": "Las serpientes no me dan mucho miedo.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 164, "pregunta": "Nunca o rara vez tengo mareos.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 165, "pregunta": "Mi memoria parece ser normal.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 166, "pregunta": "Me preocupan los temas sexuales", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 167, "pregunta": "Me es difícil entablar conversación con desconocidos", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 168, "pregunta": "He tenido épocas en las que realicé actividades que no recordaba", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 169, "pregunta": "Cuando estoy aburrido me gusta promover algo excitante.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 170, "pregunta": "Tengo miedo de volverme loco.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 171, "pregunta": "Estoy en contra de dar dinero a los mendigos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 172, "pregunta": "Frecuentemente noto temblar mis manos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 173, "pregunta": "Puedo leer mucho tiempo sin que se me canse la vista.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 174, "pregunta": "Me gusta leer y estudiar sobre lo que trabajo.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 175, "pregunta": "Siento debilidad general la mayor parte del tiempo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 176, "pregunta": "Muy pocas veces me duele la cabeza.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 177, "pregunta": "Mis manos siguen siendo hábiles.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 178, "pregunta": "A veces cuando estoy preocupado comienzo a sudar", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 179, "pregunta": "No he tenido dificultades para mantener el equilibrio", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 180, "pregunta": "Algo no anda bien en mi cabeza.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 181, "pregunta": "No tengo accesos de alergia o asma.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 182, "pregunta": "He tenido ataques de pérdida de control", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 183, "pregunta": "Se lo que pasa a mi alrededor.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 184, "pregunta": "Me desagradan algunas personas que conozco.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 185, "pregunta": "Muy pocas veces sueño despierto.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 186, "pregunta": "Me gustaría ser menos tímido.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 187, "pregunta": "Actualmente no comprendo lo que leo con facilidad (repetida)", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 188, "pregunta": "No me da miedo manejar dinero.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 189, "pregunta": "Si fuera periodista informaría sobre teatro.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 190, "pregunta": "Disfruto con diferentes clases de juegos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 191, "pregunta": "Me gusta flirtear.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 192, "pregunta": "Los niños me tratan más como a un niño que como adulto.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 193, "pregunta": "Me gustaría ser periodista.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 194, "pregunta": "Mi madre es una buena mujer.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 195, "pregunta": "Evito cuidadosamente pisar baldosas flojas", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 196, "pregunta": "Nunca he tenido erupciones en la piel preocupantes", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 197, "pregunta": "En mi hogar hay poco amor o unión.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 198, "pregunta": "Con frecuencia estoy preocupado por algo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 199, "pregunta": "Me gustaría el trabajo de contratista de obras.", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 200, "pregunta": "Normalmente oigo voces sin saber de donde vienen.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 201, "pregunta": "Me gusta la ciencia.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 202, "pregunta": "No me cuesta pedir ayuda a mis amigos.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 203, "pregunta": "Me gusta mucho cazar.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 204, "pregunta": "A menudo a mis padres les molestó el tipo de amigos que tenía.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 205, "pregunta": "A veces soy un poco chismoso.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 206, "pregunta": "Escucho tan bien como las demás personas.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 207, "pregunta": "Alguno de mis familiares tiene costumbres que me molestan.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 208, "pregunta": "A veces me siento capaz de tomar decisiones con facilidad.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 209, "pregunta": "Me gustaría pertenecer a varios clubes.", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 210, "pregunta": "Raramente noto los latidos de mi corazón.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 211, "pregunta": "Me gusta hablar sobre temas sexuales", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 212, "pregunta": "Me gusta visitar lugares donde nunca he estado.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 213, "pregunta": "He seguido una forma de vida basada en el deber.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 214, "pregunta": "Traté de que alguien no hiciera algo contra mis principios.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 215, "pregunta": "Me enojo fácilmente, pero se me pasa pronto.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 216, "pregunta": "He vivido libre de normas familiares", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 217, "pregunta": "Me preocupo muchísimo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 218, "pregunta": "Alguien ha tratado de robarme.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 219, "pregunta": "Casi todos mis familiares simpatizan conmigo", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 220, "pregunta": "Hay momentos en que no puedo estar sentado mucho tiempo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 221, "pregunta": "He tenido desengaños amorosos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 222, "pregunta": "Nunca me preocupo por mi apariencia.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 223, "pregunta": "Sueño frecuentemente con cosas privadas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 224, "pregunta": "Debería enseñarse educación sexual a niños.", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 225, "pregunta": "Creo que no soy más nervioso que la mayoría.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 226, "pregunta": "Tengo pocos o ningún dolor.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 227, "pregunta": "Mi modo de hacer las cosas tiende a ser mal interpretado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 228, "pregunta": "A veces me siento feliz flotando entre nubes.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 229, "pregunta": "No culpo a nadie por tratar de apoderarse de todo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 230, "pregunta": "Hay personas que intentan apoderarse de mis ideas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 231, "pregunta": "He tenido momentos de nerviosismo que interrumpieron mis actividades.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 232, "pregunta": "Puedo mostrarme amistoso con gente incorrecta.", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 233, "pregunta": "Me gusta estar en grupos donde se hacen bromas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 234, "pregunta": "En las elecciones voto candidatos que conozco poco", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 235, "pregunta": "Me cuesta empezar a hacer cualquier cosa.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 236, "pregunta": "Siento que soy una persona condenada.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 237, "pregunta": "En el colegio era lento para aprender", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 238, "pregunta": "Si fuera artista me gustaría dibujar flores.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 239, "pregunta": "No me molesta ser poco elegante.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 240, "pregunta": "Transpiro muy fácilmente incluso en frío.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 241, "pregunta": "A veces me es imposible vencer la tentación de robar.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 242, "pregunta": "Es más seguro no confiar en nadie", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 243, "pregunta": "Soy una persona plenamente segura de sí misma.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 244, "pregunta": "Me excito una vez por semana o más", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 245, "pregunta": "Me altera pensar temas de conversación en grupo", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 246, "pregunta": "Cuando estoy bajoneado algo emocionante me saca de ese estado", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 247, "pregunta": "No me preocupa si dejo puertas y ventanas abiertas al salir", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 248, "pregunta": "Creo que mis pecados son imperdonables", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 249, "pregunta": "Tengo entumecimiento en mi piel", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 250, "pregunta": "No culpo a aquel que se aprovecha de otro", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 251, "pregunta": "Mi vista es tan buena como siempre", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 252, "pregunta": "Me ha divertido el ingenio de un delincuente", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 253, "pregunta": "Gente extraña me mira con ojos críticos", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 254, "pregunta": "Todo tiene el mismo sabor para mí", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 255, "pregunta": "Tomo agua excesiva a diario", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 256, "pregunta": "La gente hace amigos por utilidad", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 257, "pregunta": "No noto zumbidos en mis oídos", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 258, "pregunta": "Siento fastidio hacia familiares queridos", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 259, "pregunta": "Informaría sobre deportes si fuera periodista", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 260, "pregunta": "Puedo dormir de día pero no de noche", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 261, "pregunta": "Estoy seguro de que la gente habla de mí", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 262, "pregunta": "Me divierten los chistes verdes", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 263, "pregunta": "Tengo muy pocos miedos comparado con amigos", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 264, "pregunta": "Puedo iniciar discusiones en grupo", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 265, "pregunta": "Siento aversión por criminales libres", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 266, "pregunta": "He abusado del alcohol", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 267, "pregunta": "No hablo hasta que me hablan", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 268, "pregunta": "Nunca he tenido problemas con la ley", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 269, "pregunta": "Tengo épocas más animadas sin razón", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 270, "pregunta": "No quiero ser perturbado por pensamientos sexuales", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 271, "pregunta": "Inculpados deben ponerse de acuerdo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 272, "pregunta": "No me molesta ver sufrir animales", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 273, "pregunta": "Mi sensibilidad es más intensa", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 274, "pregunta": "No me ha gustado jugar con muñecos", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 275, "pregunta": "La vida es tensión para mí", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 276, "pregunta": "Soy susceptible en algunos asuntos", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 277, "pregunta": "Me costaba hablar en público en colegio", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 278, "pregunta": "Quiero a mi madre", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 279, "pregunta": "Me siento solo en grupo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 280, "pregunta": "Consigo todas las simpatías que debería", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 281, "pregunta": "Me niego a participar en juegos por falta de habilidad", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 282, "pregunta": "Hago amigos tan rápido como los demás", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 283, "pregunta": "Me desagrada tener gente alrededor", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 284, "pregunta": "Dicen que hablo cuando duermo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 285, "pregunta": "Quien deja algo valioso es culpable de robo", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 286, "pregunta": "Todo el mundo mentiría por evitar problemas", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 287, "pregunta": "Soy más sensible que la mayoría", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 288, "pregunta": "A la gente le desagrada ayudar", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 289, "pregunta": "Sueños sobre temas sexuales", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 290, "pregunta": "Familiares encuentran defectos en mí", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 291, "pregunta": "Me aturdo fácilmente", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 292, "pregunta": "Me preocupan dinero y negocios", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 293, "pregunta": "Nunca he estado enamorado", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 294, "pregunta": "Me han asustado actos de familiares", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 295, "pregunta": "Casi nunca sueño", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 296, "pregunta": "Manchas rojas en el cuello", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 297, "pregunta": "Nunca he tenido parálisis", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 298, "pregunta": "Se me cambia la voz sin resfriado", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 299, "pregunta": "Padres me obligaron a obedecer sin razón", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 300, "pregunta": "Nunca he estado enamorado de alguien.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 301, "pregunta": "Mis padres y familiares encuentran más defectos en mí de lo que deberían.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 302, "pregunta": "Me aturdo fácilmente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 303, "pregunta": "Me preocupan el dinero y los negocios.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 304, "pregunta": "Me han asustado ciertas cosas que han hecho algunos de mis familiares.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 305, "pregunta": "Casi nunca sueño.", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 306, "pregunta": "A menudo me salen manchas rojas en el cuello.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 307, "pregunta": "Nunca he tenido parálisis ni sufrido una debilidad desacostumbrada en alguno de mis músculos.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 308, "pregunta": "Algunas veces pierdo o se me cambia la voz, incluso sin estar resfriado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 309, "pregunta": "Mi padre o mi madre me obligaron frecuentemente a obedecer, incluso cuando yo pensaba que ello no era razonable.", "respuesta": "Verdadero", "puntuacion": "0/1" },
+                { "id": 310, "pregunta": "A veces percibo olores extraños.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 311, "pregunta": "No puedo concentrarme en una sola cosa.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 312, "pregunta": "Tengo razones para sentirme celoso de uno o más de mis familiares.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 313, "pregunta": "Casi todo el tiempo siento ansiedad a causa de algo o alguien.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 314, "pregunta": "Me impaciento fácilmente con la gente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 315, "pregunta": "Muchísimas veces me gustaría estar muerto.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 316, "pregunta": "Muchísimas veces me excito tanto que me cuesta dormirme por las noches.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 317, "pregunta": "Sin duda he tenido que preocuparme por más cosas que las que me correspondían.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 318, "pregunta": "Nadie parece comprenderme.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 319, "pregunta": "A veces oigo tan bien que me molesta.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 320, "pregunta": "Olvido enseguida lo que la gente me dice.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 321, "pregunta": "Normalmente tengo que pararme a pensar antes de actuar, incluso en asuntos sin importancia.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 322, "pregunta": "A menudo cruzo la calle para no encontrarme con alguna persona.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 323, "pregunta": "Con frecuencia siento como si las cosas no fueran reales.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 324, "pregunta": "La única parte interesante de los diarios es las páginas de los chistes.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 325, "pregunta": "Tengo la costumbre de contar con objetos sin importancia, como las bombillas de un letrero luminoso o cosas similares.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 326, "pregunta": "Carezco de enemigos que deseen realmente hacerme daño.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 327, "pregunta": "Tiendo a ponerme en guardia con aquellos que se muestran algo más amables de lo que yo esperaba.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 328, "pregunta": "Normalmente espero tener éxito en las cosas que hago.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 329, "pregunta": "Oigo cosas extrañas cuando estoy solo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 330, "pregunta": "He tenido miedo de cosas o personas que sabía que no podían hacerme daño.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 331, "pregunta": "No me da miedo entrar solo a una habitación donde hay gente reunida hablando.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 332, "pregunta": "Me da miedo utilizar cuchillos u objetos muy afilados o puntiagudos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 333, "pregunta": "Algunas veces gozo con herir a personas que amo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 334, "pregunta": "Me resulta fácil lograr que la gente me tenga miedo y eso me divierte.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 335, "pregunta": "Tengo más dificultad para concentrarme que la que otros parecen tener.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 336, "pregunta": "Varias veces he dejado de hacer algo por considerar insuficiente mi habilidad.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 337, "pregunta": "Se me ocurren palabras feas, a veces horribles, y no puedo dejarlas de lado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 338, "pregunta": "Algunas veces me ronda en la cabeza un pensamiento sin importancia y me molesta durante días.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 339, "pregunta": "Casi a diario ocurre algo que me asusta.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 340, "pregunta": "A veces siento que me sobran energías.", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 341, "pregunta": "Me inclino a tomar las cosas muy en serio.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 342, "pregunta": "A veces me ha gustado ser herido por una persona querida.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 343, "pregunta": "La gente dice de mi cosas insultantes y vulgares.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 344, "pregunta": "Me siento incómodo cuando estoy 'bajo techo' (dentro de un edificio o habitación).", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 345, "pregunta": "Soy poco consciente de mi mismo.", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 346, "pregunta": "Estoy seguro de que alguien controla mi mente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 347, "pregunta": "En las fiestas y reuniones, en vez de unirme al grupo, es más probable que me siente solo o con otra persona.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 348, "pregunta": "En micros, trenes, suelo conversar con extraños.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 349, "pregunta": "Me gustan los niños.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 350, "pregunta": "La gente me decepciona con frecuencia.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 351, "pregunta": "Me gusta jugar y apostar.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 352, "pregunta": "Frecuentemente mis proyectos me han parecido tan llenos de dificultades que he tenido que abandonarlos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 353, "pregunta": "Me gusta mucho ir a bailar.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 354, "pregunta": "Durante ciertos períodos mi mente parece trabajar más despacio que de costumbre.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 355, "pregunta": "Si me dieran la oportunidad, podría hacer cosas que beneficiarían mucho al mundo.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 356, "pregunta": "Con frecuencia me he encontrado con personas con reputación de expertas, pero que no eran mejores que yo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 357, "pregunta": "Me siento fracasado cuando me hablan del éxito de alguien que conozco bien.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 358, "pregunta": "Con frecuencia pienso: 'Me gustaría volver a ser niño'.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 359, "pregunta": "Me asusto fácilmente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 360, "pregunta": "Nada me hace más feliz que estar solo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 361, "pregunta": "Si me dieran la oportunidad podría ser un buen líder.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 362, "pregunta": "Me molestan las anécdotas indecentes.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 363, "pregunta": "Normalmente la gente pide para sus propios derechos más respeto que el que da a los de otras personas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 364, "pregunta": "Me gustan las reuniones sociales porque puedo estar con gente.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 365, "pregunta": "Trato de memorizar los cuentos divertidos para poder contárselos a otros.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 366, "pregunta": "Una o más veces en mi vida sentí que alguien me obligó a hacer cosas hipnotizándome.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 367, "pregunta": "Me resulta difícil abandonar una tarea una vez que la empecé.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 368, "pregunta": "Generalmente no me involucro en los chismes que cuentan los que me rodean.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 369, "pregunta": "A menudo han sentido celos de mis ideas porque no las pensaron antes.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 370, "pregunta": "Me encanta estar con mucha gente (recitales, manifestaciones).", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 371, "pregunta": "No me preocupa encontrarme con extraños.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 372, "pregunta": "He fingido 'estar enfermo' para evitar hacer algo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 373, "pregunta": "Mis preocupaciones tienden a desaparecer cuando me junto con amigos.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 374, "pregunta": "Alguien ha tratado de influenciar mi mente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 375, "pregunta": "Tiendo a abandonar lo que estoy haciendo si me sale mal.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 376, "pregunta": "Me gusta que la gente conozca lo que realmente pienso.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 377, "pregunta": "He tenido períodos en los que me sentí tan lleno de fuerzas que no necesitaba dormir.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 378, "pregunta": "Siempre que sea posible evito estar en una multitud.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 379, "pregunta": "Trato de evitar situaciones de crisis o dificultad.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 380, "pregunta": "Me considero capaz de lograr lo que me propongo cuando otros creen que no vale la pena.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 381, "pregunta": "Me gustan las fiestas y reuniones sociales.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 382, "pregunta": "Muchas veces desee pertenecer al sexo opuesto.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 383, "pregunta": "No me enojo fácilmente.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 384, "pregunta": "He hecho algunas cosas malas en el pasado que no se las conté a nadie.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 385, "pregunta": "La mayoría de la gente puede hacer cosas incorrectas con tal de lograr su propósito.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 386, "pregunta": "Me pongo nervioso cuando la gente me hace preguntas personales.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 387, "pregunta": "Me siento incapaz de planificar mi futuro.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 388, "pregunta": "Me desagrada mi forma de ser.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 389, "pregunta": "Generalmente me enojo cuando amigos o familiares me dan consejos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 390, "pregunta": "Me preocupo de que otros me vean como raro / torpe.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 391, "pregunta": "Siento que diré algo vergonzoso cada vez que hablo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 392, "pregunta": "Me golpearon mucho cuando era chico.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 393, "pregunta": "Me pongo nervioso si tengo que hablar en público.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 394, "pregunta": "Me molesto cuando la gente me elogia.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 395, "pregunta": "Me disgusta escuchar a la gente que da sus opiniones acerca de la vida.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 396, "pregunta": "A menudo he tenido desacuerdos serios con gente amiga.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 397, "pregunta": "¿A veces desearías no preocuparte?", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 398, "pregunta": "Sé que puedo contar con la ayuda de mi familia cuando las cosas me van mal.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 399, "pregunta": "Me gustaba jugar “a la mamá” o “al papá” cuando era niño.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 400, "pregunta": "No le tengo miedo al fuego.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 401, "pregunta": "A veces me vienen ganas de maldecir.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 402, "pregunta": "Frecuentemente me encuentro preocupado por algo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 403, "pregunta": "Mi familia no aprueba el trabajo que elegí (o el que pienso elegir).", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 404, "pregunta": "A veces dudo que la gente con la que hablo esté realmente interesada en lo que digo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 405, "pregunta": "A menudo me siento como si hubiera hecho algo malo o malvado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 406, "pregunta": "A menudo he tenido que recibir órdenes de alguien que sabía menos que yo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 407, "pregunta": "Disfruto mucho de las películas.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 408, "pregunta": "Creo que soy una persona condenada.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 409, "pregunta": "A menudo tengo que esforzarme para no demostrar que soy tímido.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 410, "pregunta": "Alguien tiene intención de hacerme daño.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 411, "pregunta": "Siento que mi familia no me apoya tanto como debería.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 412, "pregunta": "A veces me siento tan lleno de energía que no necesito dormir.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 413, "pregunta": "A menudo siento que me falta el aire.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 414, "pregunta": "A menudo me siento cansado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 415, "pregunta": "He tenido períodos en los que me sentía muy feliz sin una razón especial.", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 416, "pregunta": "Incluso cuando estoy con gente me siento solo la mayor parte del tiempo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 417, "pregunta": "A veces me río de bromas sucias.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 418, "pregunta": "He tenido períodos en los que realizaba actividades y luego no recordaba lo que había hecho.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 419, "pregunta": "A veces me siento como si estuviera a punto de estallar.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 420, "pregunta": "Hablo solo a veces.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 421, "pregunta": "Me preocupo por cosas que no tienen importancia.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 422, "pregunta": "Tengo dificultades para empezar a hacer las cosas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 423, "pregunta": "A menudo me siento desesperado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 424, "pregunta": "No me importa lo que la gente piense de mí.", "respuesta": "Falso", "puntuacion": "0/1" },
+                { "id": 425, "pregunta": "Me gustaría ser tan feliz como otros parecen ser.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 426, "pregunta": "Siento que la gente me mira con desprecio.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 427, "pregunta": "A menudo tengo pensamientos que me avergüenzan.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 428, "pregunta": "He tenido períodos en los que me sentía muy triste sin saber por qué.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 429, "pregunta": "Me gusta la vida que llevo.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 430, "pregunta": "Siento que me falta confianza en mí mismo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 431, "pregunta": "A veces siento que no valgo nada.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 432, "pregunta": "Me siento culpable por cosas que he hecho en el pasado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 433, "pregunta": "A menudo me siento tenso o nervioso.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 434, "pregunta": "Tengo miedo de volverme loco.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 435, "pregunta": "Siento que la vida es una carga.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 436, "pregunta": "Me gustaría ser una persona importante.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 437, "pregunta": "A menudo me siento incomprendido.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 438, "pregunta": "Siento que nadie me quiere de verdad.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 439, "pregunta": "A veces siento que el mundo está en mi contra.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 440, "pregunta": "Me resulta difícil tomar decisiones.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 441, "pregunta": "A menudo me siento aburrido.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 442, "pregunta": "Siento que he fracasado en la vida.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 443, "pregunta": "A veces siento ganas de herirme a mí mismo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 444, "pregunta": "Me preocupa lo que el futuro me depara.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 445, "pregunta": "Siento que no tengo control sobre mi vida.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 446, "pregunta": "A menudo me siento solo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 447, "pregunta": "Siento que mi vida no tiene sentido.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 448, "pregunta": "A veces siento que no puedo más.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 449, "pregunta": "Me preocupa mi salud mental.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 450, "pregunta": "Siento que no encajo en ninguna parte.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 451, "pregunta": "A menudo me siento triste sin saber por qué.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 452, "pregunta": "Me resulta difícil concentrarme en lo que hago.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 453, "pregunta": "Siento que mi familia no me comprende.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 454, "pregunta": "A menudo me siento cansado sin haber hecho mucho.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 455, "pregunta": "Me preocupa mi situación económica.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 456, "pregunta": "Siento que no soy lo suficientemente bueno.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 457, "pregunta": "A menudo me siento frustrado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 458, "pregunta": "Siento que la gente se aprovecha de mí.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 459, "pregunta": "Me resulta difícil hacer amigos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 460, "pregunta": "Siento que no tengo a nadie en quien confiar.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 461, "pregunta": "A menudo me siento estresado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 462, "pregunta": "Siento que mi vida es un caos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 463, "pregunta": "Me preocupa lo que los demás piensen de mí.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 464, "pregunta": "Siento que no soy capaz de lograr mis metas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 465, "pregunta": "A menudo me siento angustiado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 466, "pregunta": "Siento que mi vida no tiene dirección.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 467, "pregunta": "Me resulta difícil expresar mis sentimientos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 468, "pregunta": "Siento que la gente no me valora.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 469, "pregunta": "A menudo me siento abrumado por mis responsabilidades.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 470, "pregunta": "Siento que mi vida es una mentira.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 471, "pregunta": "Me preocupa no ser una buena persona.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 472, "pregunta": "Siento que no tengo futuro.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 473, "pregunta": "A menudo me siento impotente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 474, "pregunta": "Siento que mi vida es vacía.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 475, "pregunta": "Me resulta difícil relajarme.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 476, "pregunta": "Siento que la gente me juzga constantemente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 477, "pregunta": "A menudo me siento solo aunque esté rodeado de gente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 478, "pregunta": "Siento que no puedo confiar en nadie.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 479, "pregunta": "Me preocupa mi salud física.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 480, "pregunta": "Siento que mi vida es una lucha constante.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 481, "pregunta": "A menudo me siento desanimado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 482, "pregunta": "Siento que no soy feliz.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 483, "pregunta": "Me resulta difícil dormir por las noches.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 484, "pregunta": "Siento que la gente me evita.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 485, "pregunta": "A menudo me siento irritado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 486, "pregunta": "Siento que no tengo control sobre mis emociones.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 487, "pregunta": "Me preocupa ser una carga para los demás.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 488, "pregunta": "Siento que mi vida no tiene propósito.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 489, "pregunta": "A menudo me siento asustado sin saber por qué.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 490, "pregunta": "Siento que la gente me critica a mis espaldas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 491, "pregunta": "Me resulta difícil concentrarme en mi trabajo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 492, "pregunta": "Siento que mi vida es aburrida.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 493, "pregunta": "A menudo me siento cansado física y mentalmente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 494, "pregunta": "Siento que no soy amado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 495, "pregunta": "Me preocupa mi futuro laboral.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 496, "pregunta": "Siento que no soy capaz de enfrentar mis problemas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 497, "pregunta": "A menudo me siento desesperanzado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 498, "pregunta": "Siento que mi vida es un fracaso.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 499, "pregunta": "Me resulta difícil disfrutar de las cosas que antes me gustaban.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 500, "pregunta": "Siento que la gente me malinterpreta.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 501, "pregunta": "A menudo me siento agotado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 502, "pregunta": "Siento que no tengo a nadie que me apoye.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 503, "pregunta": "Me preocupa mi bienestar emocional.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 504, "pregunta": "Siento que mi vida es una rutina.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 505, "pregunta": "A menudo me siento triste por pequeñas cosas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 506, "pregunta": "Siento que no soy valorado en mi trabajo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 507, "pregunta": "Me resulta difícil tomar la iniciativa.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 508, "pregunta": "Siento que mi vida es insignificante.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 509, "pregunta": "A menudo me siento ansioso por el futuro.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 510, "pregunta": "Siento que la gente me juzga injustamente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 511, "pregunta": "Me resulta difícil concentrarme en mis estudios.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 512, "pregunta": "Siento que mi vida es una pérdida de tiempo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 513, "pregunta": "A menudo me siento desmotivado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 514, "pregunta": "Siento que no soy escuchado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 515, "pregunta": "Me preocupa mi salud a largo plazo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 516, "pregunta": "Siento que mi vida es monótona.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 517, "pregunta": "A menudo me siento deprimido.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 518, "pregunta": "Siento que no tengo amigos de verdad.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 519, "pregunta": "Me resulta difícil mantener la calma.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 520, "pregunta": "Siento que la gente se burla de mí.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 521, "pregunta": "A menudo me siento cansado al despertar.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 522, "pregunta": "Siento que no soy respetado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 523, "pregunta": "Me preocupa mi falta de metas.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 524, "pregunta": "Siento que mi vida es un error.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 525, "pregunta": "A menudo me siento solo en mi dolor.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 526, "pregunta": "Siento que la gente me ignora.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 527, "pregunta": "Me resulta difícil concentrarme en la lectura.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 528, "pregunta": "Siento que mi vida es una carga para los demás.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 529, "pregunta": "A menudo me siento tenso sin motivo aparente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 530, "pregunta": "Siento que no soy comprendido por mis amigos.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 531, "pregunta": "Me preocupa mi falta de ambición.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 532, "pregunta": "Siento que mi vida es un callejón sin salida.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 533, "pregunta": "A menudo me siento asqueado de mí mismo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 534, "pregunta": "Siento que la gente me miente.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 535, "pregunta": "Me resulta difícil concentrarme en una conversación.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 536, "pregunta": "Siento que mi vida no tiene valor.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 537, "pregunta": "A menudo me siento atrapado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 538, "pregunta": "Siento que no soy aceptado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 539, "pregunta": "Me preocupa mi falta de confianza.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 540, "pregunta": "Siento que mi vida es una farsa.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 541, "pregunta": "A menudo me siento de mal humor.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 542, "pregunta": "Siento que la gente me mira con lástima.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 543, "pregunta": "Me resulta difícil concentrarme en mis tareas diarias.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 544, "pregunta": "Siento que mi vida es un desastre.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 545, "pregunta": "A menudo me siento vacío por dentro.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 546, "pregunta": "Siento que no soy lo suficientemente fuerte.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 547, "pregunta": "Me preocupa mi falta de motivación.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 548, "pregunta": "Siento que mi vida es un sinsentido.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 549, "pregunta": "A menudo me siento desesperado por mi situación.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 550, "pregunta": "Siento que la gente no confía en mí.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 551, "pregunta": "Me resulta difícil concentrarme en lo que dicen los demás.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 552, "pregunta": "Siento que mi vida es un fracaso absoluto.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 553, "pregunta": "A menudo me siento solo en el mundo.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 554, "pregunta": "Siento que no soy importante para nadie.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 555, "pregunta": "Me preocupa mi falta de propósito.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 556, "pregunta": "Siento que mi vida es un desperdicio.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 557, "pregunta": "A menudo me siento desamparado.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 558, "pregunta": "Siento que la gente me desprecia.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 559, "pregunta": "Me resulta difícil concentrarme en mis metas personales.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 560, "pregunta": "Soy feliz la mayor parte del tiempo.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 561, "pregunta": "No parece importarme lo que me suceda.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 562, "pregunta": "Tengo pocos o ningún dolor.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 563, "pregunta": "Mi juicio es tan bueno como siempre lo ha sido.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 564, "pregunta": "Amo a mi padre, o (si ha muerto) amé a mi padre.", "respuesta": "Verdadero", "puntuacion": "1/1" },
+                { "id": 565, "pregunta": "Sufro de molestias en la parte baja de la espalda.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 566, "pregunta": "He tenido episodios en los que no podía controlar mis movimientos o el habla, pero sabía lo que pasaba a mi alrededor.", "respuesta": "Falso", "puntuacion": "1/1" },
+                { "id": 567, "pregunta": "Me siento cansado la mayor parte del tiempo.", "respuesta": "Falso", "puntuacion": "1/1" }
+            ]
+        };
+
+        // --- SISTEMA DE LOGIN Y TEMAS ---
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            const errorMsg = document.getElementById('login-error');
+
+            if (user === 'admin' && pass === 'admin12345') {
+                // Login Exitoso
+                errorMsg.style.display = 'none';
+                localStorage.setItem('isLoggedIn', 'true');
+                initializeSystem();
+            } else {
+                // Login Fallido
+                errorMsg.style.display = 'block';
+                // Animación de temblor
+                const container = document.getElementById('login-screen');
+                container.style.animation = 'shake 0.5s';
+                setTimeout(() => container.style.animation = '', 500);
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('isLoggedIn');
+            location.reload();
+        }
+
+        function initializeSystem() {
+            // Mostrar botón de configuración y navegar al menú
+            document.getElementById('settings-toggle').style.display = 'flex';
+
+            // Intentar usar showScreen, si no, manual
+            if (typeof showScreen === 'function') {
+                showScreen('menu-screen');
+            } else {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById('menu-screen').classList.add('active');
+            }
+            loadSavedTheme();
+        }
+
+        // --- SIDEBAR TEMAS ---
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('open');
+        }
+
+        function setTheme(theme) {
+            if (theme === 'default') {
+                document.body.removeAttribute('data-theme');
+            } else {
+                document.body.setAttribute('data-theme', theme);
+            }
+            localStorage.setItem('selectedTheme', theme);
+        }
+
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('selectedTheme');
+            if (savedTheme) {
+                setTheme(savedTheme);
+            }
+        }
+
+        // VERIFICAR SESION AL INICIO
+        // Usamos setTimeout para asegurar que corra después de cualquier otra inicialización
+        setTimeout(function () {
+            if (localStorage.getItem('isLoggedIn') === 'true') {
+                initializeSystem();
+            } else {
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById('login-screen').classList.add('active');
+                document.getElementById('settings-toggle').style.display = 'none';
+            }
+        }, 100);
+
+        let examenPsicologicoCorregido = null;
+        let examenPsicometricoCorregido = null;
+        let currentExamType = '';
+
+        // DATOS DEL EXAMEN PSICOMETRICO (Raw)
+        const rawPsicometrico = { "preguntas": [{ "id": 1, "pregunta": "Lo opuesto al odio es:", "opciones": ["enemigo", "temor", "amor", "amigo", "alegría"], "respuesta_correcta": "amor", "puntuacion": "1/1" }, { "id": 2, "pregunta": "Si tres lápices cuestan cinco pesos, ¿Cuántos lápices podré comprar con cincuenta pesos?", "opciones": ["30", "25", "36", "15", "40"], "respuesta_correcta": "30", "puntuacion": "1/1" }, { "id": 3, "pregunta": "Un pájaro no siempre tiene:", "opciones": ["alas", "ojos", "patas", "nido", "pico"], "respuesta_correcta": "nido", "puntuacion": "1/1" }, { "id": 4, "pregunta": "Lo opuesto a honor es:", "opciones": ["derrota", "villanía", "humillación", "cobardía", "miedo"], "respuesta_correcta": "cobardía", "puntuacion": "1/1" }, { "id": 5, "pregunta": "El zorro se parece más a:", "opciones": ["el lobo", "la cabra", "el cerdo", "el tigre", "el gato"], "respuesta_correcta": "el lobo", "puntuacion": "1/1" }, { "id": 6, "pregunta": "El silencio tiene la misma relación con el sonido que la oscuridad con:", "opciones": ["sótano", "luz", "ruido", "quietud", "noche"], "respuesta_correcta": "luz", "puntuacion": "1/1" }, { "id": 7, "pregunta": "Un grupo consistía en dos matrimonios, dos hermanos y dos hermanas. ¿Cuál es el número mínimo de personas que podrían componer el grupo?", "opciones": ["2", "8", "6", "5", "4"], "respuesta_correcta": "2", "puntuacion": "0/1" }, { "id": 8, "pregunta": "Un árbol siempre tiene:", "opciones": ["hojas", "fruto", "yemas", "raíces", "sombra"], "respuesta_correcta": "raíces", "puntuacion": "1/1" }, { "id": 9, "pregunta": "Lo opuesto de lo económico es:", "opciones": ["barato", "avaro", "gastador", "valor", "rico"], "respuesta_correcta": "gastador", "puntuacion": "1/1" }, { "id": 10, "pregunta": "La plata es más cara que el hierro porque es:", "opciones": ["más pesada", "más escasa", "más blanca", "más dura", "más hermosa"], "respuesta_correcta": "más escasa", "puntuacion": "1/1" }, { "id": 11, "pregunta": "¿Cuál de las seis razones expresa el significado del refrán?: \"Comida hecha compañía desecha\".", "opciones": ["No hay que separarse de los amigos después de comer.", "No se debe olvidar el beneficio recibido y alejarse de aquel de quien se recibió.", "A nada conduce prolongar demasiado un asunto.", "La mayor dificultad en cualquier cosa consiste, por lo común en los principios.", "Es peligroso prolongar la sobremesa.", "Cada uno debe mirar antes por sí mismo que por los otros"], "respuesta_correcta": "No se debe olvidar el beneficio recibido y alejarse de aquel de quien se recibió.", "puntuacion": "1/1" }, { "id": 12, "pregunta": "¿Cuál de las seis razones expresa el significado de este proverbio? \"Obra empezada, medio acabada\".", "opciones": ["No hay que separarse de los amigos después de comer.", "No se debe olvidar el beneficio recibido y alejarse de aquel de quien se recibió.", "A nada conduce prolongar demasiado un asunto.", "La mayor dificultad en cualquier cosa consiste, por lo común en los principios.", "Es peligroso prolongar la sobremesa.", "Cada uno debe mirar antes por sí mismo que por los otros"], "respuesta_correcta": "A nada conduce prolongar demasiado un asunto.", "puntuacion": "0/1" }, { "id": 13, "pregunta": "¿Cuál de las seis razones explica el proverbio \"Antes son mis dientes que mis parientes\"", "opciones": ["No hay que separarse de los amigos después de comer.", "No se debe olvidar el beneficio recibido y alejarse de aquel de quien se recibió.", "A nada conduce prolongar demasiado un asunto.", "La mayor dificultad en cualquier cosa consiste, por lo común en los principios.", "Es peligroso prolongar la sobremesa.", "Cada uno debe mirar antes por sí mismo que por los otros"], "respuesta_correcta": "Cada uno debe mirar antes por sí mismo que por los otros", "puntuacion": "1/1" }, { "id": 14, "pregunta": "Una luz eléctrica se relaciona con la bujía (vela de alumbrar) como un automóvil se relaciona con:", "opciones": ["un carruaje", "la electricidad", "una llanta", "la velocidad", "el resplandor"], "respuesta_correcta": "un carruaje", "puntuacion": "1/1" }, { "id": 15, "pregunta": "Si un caballo puede correr a la velocidad de 6 metros en un 1/4 de segundo, ¿Cuántos metros corre en 10 segundos?", "opciones": ["120", "240", "24", "60", "100"], "respuesta_correcta": "240", "puntuacion": "1/1" }, { "id": 16, "pregunta": "Una comida siempre supone:", "opciones": ["mesa", "plato", "hambre", "alimento", "agua"], "respuesta_correcta": "alimento", "puntuacion": "1/1" }, { "id": 17, "pregunta": "De las cinco palabras siguientes cuatro son parecidas, ¿Cuál es la que no es parecida a esas cuatro?", "opciones": ["postre", "lima", "pato", "papel", "claro"], "respuesta_correcta": "claro", "puntuacion": "1/1" }, { "id": 18, "pregunta": "Lo opuesto a nunca es:", "opciones": ["a menudo", "a veces", "frecuentemente", "siempre", "de vez en cuando"], "respuesta_correcta": "siempre", "puntuacion": "1/1" }, { "id": 19, "pregunta": "Un reloj tiene con el tiempo, la misma relación que un termómetro con:", "opciones": ["un reloj", "caliente", "tubo", "mercurio", "temperatura"], "respuesta_correcta": "temperatura", "puntuacion": "1/1" }, { "id": 20, "pregunta": "¿Cuál de las siguientes palabras debería ponerse en el espacio en blanco para que sea cierta la afirmación: \"____ los hombres son mas bajos que sus esposas\".", "opciones": ["siempre", "a menudo", "a veces", "raras veces", "nunca"], "respuesta_correcta": "a veces", "puntuacion": "1/1" }, { "id": 21, "pregunta": "En la siguiente serie hay un número equivocado. ¿Cuál debería ocupar su lugar? 1-4-2-5-3-6-4-7-5-9-6-9", "opciones": ["8", "10", "12", "11", "13"], "respuesta_correcta": "8", "puntuacion": "1/1" }, { "id": 22, "pregunta": "Si las dos primeras proposiciones son ciertas la terceras es: 1. Todos los miembros de este club son argentinos. 2. González no es argentino. 3. González es miembro de este club.", "opciones": ["verdadera", "falsa", "dudosa"], "respuesta_correcta": "falsa", "puntuacion": "1/1" }, { "id": 23, "pregunta": "una lucha siempre tiene", "opciones": ["réferi", "contendientes", "espectadores", "aplausos", "victoria"], "respuesta_correcta": "contendientes", "puntuacion": "1/1" }, { "id": 24, "pregunta": "¿Encuentra el valor que continua en la serie? 20, 28, 30, 38, 40, 48,", "opciones": ["58", "49", "35", "50"], "respuesta_correcta": "50", "puntuacion": "1/1" }, { "id": 25, "pregunta": "De los números que se repiten 3 veces en la siguiente serie, ¿Cuál es el número más pequeño? 6-4-5-3-7-8-9-5-9-8-8-6-5-4-7-3-8-9", "opciones": ["0", "9", "5", "8", "7"], "respuesta_correcta": "9", "puntuacion": "0/1" }, { "id": 26, "pregunta": "La luna se relaciona con la tierra como la tierra con:", "opciones": ["marte", "el sol", "las nubes", "las estrellas", "el universo"], "respuesta_correcta": "el sol", "puntuacion": "1/1" }, { "id": 27, "pregunta": "¿Qué palabra hace falta para que sea verdadera la siguiente proposición? \"Los padres son ____ más prudentes que los hijos\".", "opciones": ["siempre", "usualmente", "mucho", "raras veces", "nunca"], "respuesta_correcta": "usualmente", "puntuacion": "0/1" }, { "id": 28, "pregunta": "¿Encuentra el valor que continua en la serie? 30, 40, 60, 90...", "opciones": ["130", "110", "120", "140"], "respuesta_correcta": "130", "puntuacion": "1/1" }, { "id": 29, "pregunta": "Sofía dibuja círculos: uno azul, verde, uno rojo, uno negro, uno amarillo y así sucesivamente. ¿De qué color es el 28avo. círculo?", "opciones": ["Azul", "Verde", "Rojo", "Negro", "amarillo"], "respuesta_correcta": "Rojo", "puntuacion": "1/1" }, { "id": 30, "pregunta": "lo opuesto a extraño:", "opciones": ["oportuno", "normal", "habitual", "corriente", "común"], "respuesta_correcta": "común", "puntuacion": "0/1" }, { "id": 31, "pregunta": "Lo opuesto a torpe es:", "opciones": ["fuerte", "bonito", "corto", "hábil", "rápido"], "respuesta_correcta": "hábil", "puntuacion": "1/1" }, { "id": 32, "pregunta": "Una madre siempre es más ____ que su hija\"", "opciones": ["sabia", "alta", "gruesa", "vieja", "arrugada"], "respuesta_correcta": "vieja", "puntuacion": "1/1" }, { "id": 33, "pregunta": "¿Cuál de las cinco proposiciones indica el significado del proverbio \"Haz bien y guárdate\"?", "opciones": ["El bien ha de hacerse desinteresadamente.", "Nunca se hace el bien sin ningún provecho.", "Hay que obrar bien y no publicarlo.", "Hay que hacer el bien al enemigo.", "Los ingratos pagan con malas obras el bien que se les hace."], "respuesta_correcta": "Hay que obrar bien y no publicarlo.", "puntuacion": "0/1" }, { "id": 34, "pregunta": "¿Cuál de las cinco proposiciones explica el proverbio \"Haz bien y no mires a quien\"?", "opciones": ["El bien ha de hacerse desinteresadamente.", "Nunca se hace el bien sin ningún provecho.", "Hay que obrar bien y no publicarlo.", "Hay que hacer el bien al enemigo.", "Los ingratos pagan con malas obras el bien que se les hace."], "respuesta_correcta": "El bien ha de hacerse desinteresadamente.", "puntuacion": "1/1" }, { "id": 35, "pregunta": "¿Cuál de las cinco proposiciones explica el proverbio \"Haz buena harina y no toques bocina\"?", "opciones": ["El bien ha de hacerse desinteresadamente.", "Nunca se hace el bien sin ningún provecho.", "Hay que obrar bien y no publicarlo.", "Hay que hacer el bien al enemigo.", "Los ingratos pagan con malas obras el bien que se les hace."], "respuesta_correcta": "Hay que obrar bien y no publicarlo.", "puntuacion": "1/1" }, { "id": 36, "pregunta": "Cuando un individuo enajena su propiedad es porque:", "opciones": ["la compra", "la vende", "la devuelve", "la presta", "la regala"], "respuesta_correcta": "la vende", "puntuacion": "1/1" }, { "id": 37, "pregunta": "¿Qué se relaciona con enfermedad, como cuidado se relaciona con accidente?", "opciones": ["doctor", "cirugía", "medicina", "hospital", "salubridad"], "respuesta_correcta": "medicina", "puntuacion": "0/1" }, { "id": 38, "pregunta": "De estas cinco cosas, cuatro son parecidas en algo. ¿Cuál es la que no pertenece a ese grupo?", "opciones": ["contrabando", "robo", "calma", "estafa", "venta"], "respuesta_correcta": "calma", "puntuacion": "1/1" }, { "id": 39, "pregunta": "Si diez cajas llenas de manzanas pesan cuatrocientos kilogramos, ¿Cuánto pesan sólo las manzanas, si cada caja pesa 4 kilogramos vacía?", "opciones": ["380", "370", "350", "360", "355"], "respuesta_correcta": "360", "puntuacion": "1/1" }, { "id": 40, "pregunta": "Lo opuesto de esperanza es:", "opciones": ["fe", "desaliento", "tristeza", "desgracia", "odio"], "respuesta_correcta": "desaliento", "puntuacion": "1/1" }, { "id": 41, "pregunta": "Si todas las letras que ocupan números impares se cruzaran, ¿Cuál sería la décima letra no cruzada? ABCDEFGHIJKLMN ÑOPQRSTUVWXYZ", "opciones": ["P", "N", "O", "S", "T"], "respuesta_correcta": "P", "puntuacion": "1/1" }, { "id": 42, "pregunta": "¿Qué letra en la palabra METACRÓMICO, ocupa el mismo lugar, contando desde el principio en dicha palabra y en el alfabeto?", "opciones": ["H", "K", "O", "G", "J"], "respuesta_correcta": "O", "puntuacion": "1/1" }, { "id": 43, "pregunta": "Lo que la gente dice de una persona constituye su:", "opciones": ["carácter", "murmuración", "reputación", "disposición", "personalidad"], "respuesta_correcta": "reputación", "puntuacion": "1/1" }, { "id": 44, "pregunta": "Si 2 1/2 metros de tela cuestan 30 pesos, ¿Cuánto costarán 10 metros?", "opciones": ["120", "300", "220", "140", "60"], "respuesta_correcta": "120", "puntuacion": "1/1" }, { "id": 45, "pregunta": "Si las palabras siguientes se ordenaran para formar una oración, ¿con qué letra comenzaría la tercera palabra de dicha proposición? BAJO, CONTRARIO, SIGNIFICA, QUE, LO, ALTO", "opciones": ["B", "L", "Q", "C", "A"], "respuesta_correcta": "Q", "puntuacion": "1/1" }, { "id": 46, "pregunta": "Si las primeras dos proposiciones son verdaderas la tercera es: 1. Jorge es mayor que Paco. 2. Jaime es mayor que Jorge. 3. Paco es menor que Jaime.", "opciones": ["verdadera", "falsa", "dudosa"], "respuesta_correcta": "verdadera", "puntuacion": "1/1" }, { "id": 47, "pregunta": "Suponiendo que en la palabra CONSTITUCIONAL, la primera y la segunda letras se intercambiaran y también la 3a con la 4a y la 5a con la 6a, etc. ¿Cuál sería la doceava letra?, contando de izquierda a derecha.", "opciones": ["A", "L", "N"], "respuesta_correcta": "L", "puntuacion": "1/1" }, { "id": 48, "pregunta": "Un número está equivocado en la siguiente serie, ¿Cuál debe ir en su lugar? 0-1-3-6-10-15-21-28-34", "opciones": ["28", "9", "34", "36", "12"], "respuesta_correcta": "36", "puntuacion": "1/1" }, { "id": 49, "pregunta": "Si cuatro y medio metros de tela cuestan 90 pesos, ¿Cuántos pesos costarán 2 1/2 metros?", "opciones": ["80", "55", "60", "45", "50"], "respuesta_correcta": "50", "puntuacion": "1/1" }, { "id": 50, "pregunta": "La influencia de un hombre en la comunidad en que vive debe depender de su:", "opciones": ["fortuna", "dignidad", "sabiduría", "ambición", "poder político"], "respuesta_correcta": "sabiduría", "puntuacion": "1/1" }, { "id": 51, "pregunta": "¿Cuál de las siguientes palabras tiene la misma relación con \"poco\", que ordinario tiene con respecto a \"excepcional\"?", "opciones": ["nada", "algo", "mucho", "menos", "más"], "respuesta_correcta": "mucho", "puntuacion": "1/1" }, { "id": 52, "pregunta": "Lo opuesto a traidor es:", "opciones": ["amistoso", "valiente", "sabio", "cobarde", "leal"], "respuesta_correcta": "leal", "puntuacion": "1/1" }, { "id": 53, "pregunta": "¿Cuál de las cinco siguientes palabras tiene menos relación con las otras cuatro?", "opciones": ["bueno", "ancho", "rojo", "camino", "espeso"], "respuesta_correcta": "espeso", "puntuacion": "0/1" }, { "id": 54, "pregunta": "Si las dos primeras proposiciones son verdaderas, la tercera es: 1. Algunos de los amigos de López son cordobeses. 2. Algunos de los amigos de López son dentistas. 3. Algunos de los amigos de López son dentistas cordobeses.", "opciones": ["verdadera", "falsa", "no se sabe"], "respuesta_correcta": "no se sabe", "puntuacion": "1/1" }, { "id": 55, "pregunta": "¿Cuántas de las siguientes palabras pueden formarse con la palabra MURCIELAGO usando las letras cualquier número de veces? RAMIRO, MARIANELA, ABRUMO, AMORES, GRANO, MADURO, CLAMORES, MOCHILA, GLORIA, RUMIARÍA, GIMIERAN, GRUMETE, GLORIOSO, GRACIOSÍSIMO.", "opciones": ["1", "3", "5", "6", "4"], "respuesta_correcta": "3", "puntuacion": "1/1" }, { "id": 56, "pregunta": "La afirmación de que la luna es un queso es:", "opciones": ["absurda", "dudosa", "imposible", "injusta", "falaz"], "respuesta_correcta": "absurda", "puntuacion": "1/1" }, { "id": 57, "pregunta": "De las cinco cosas que se nombran enseguida, cuatro se parecen. ¿Cuál no se relaciona con las otras?", "opciones": ["alquitrán", "tiza", "hollín", "carbón", "ébano"], "respuesta_correcta": "tiza", "puntuacion": "1/1" }, { "id": 58, "pregunta": "¿Qué cosa se relaciona con un cubo, como un círculo con un cuadro?", "opciones": ["circunferencia", "esfera", "ángulos", "sólido", "espesor"], "respuesta_correcta": "esfera", "puntuacion": "0/1" }, { "id": 59, "pregunta": "Si las palabras siguientes se vieran por reflexión en un espejo lateral, ¿Cuál de ellas se vería exactamente igual a como está escrita?", "opciones": ["ORURO", "OMOR", "ANCA", "SOMOS", "AMA"], "respuesta_correcta": "AMA", "puntuacion": "1/1" }, { "id": 60, "pregunta": "Si una cinta de 24 cm de largo, mide 22 cm después de lavada (por encogerse), ¿Qué longitud tendrá una cinta de 36 cm después de lavada?", "opciones": ["26", "31", "33", "30", "34"], "respuesta_correcta": "33", "puntuacion": "1/1" }, { "id": 61, "pregunta": "¿Cuál de las siguientes palabras indican un rasgo de carácter?", "opciones": ["personalidad", "estima", "amor", "generosidad", "salud"], "respuesta_correcta": "salud", "puntuacion": "0/1" }, { "id": 62, "pregunta": "Encuentre dos letras en la palabra DOMINGO, que tienen tantas letras entre ambas como las mismas letras tienen en el alfabeto. ABCDEFGHIJKL MNNOPQRSTUVWXYZ", "opciones": ["N,O", "D,M", "I,G", "0,1", "M,N"], "respuesta_correcta": "N,O", "puntuacion": "1/1" }, { "id": 63, "pregunta": "Revolución se relaciona con evolución como aviación se relaciona con:", "opciones": ["pájaros", "girar", "caminar", "alas", "estar parado."], "respuesta_correcta": "alas", "puntuacion": "1/1" }, { "id": 64, "pregunta": "En la siguiente serie hay un número equivocado. ¿Con qué otro debe remplazarse? 1-3-9-27-81-108", "opciones": ["245", "241", "243", "220", "200"], "respuesta_correcta": "243", "puntuacion": "1/1" }, { "id": 65, "pregunta": "Si Juan puede andar en bicicleta 30 metros, mientras Pedro anda 20, ¿Cuántos puede andar Juan mientras Pedro anda 30 metros?", "opciones": ["50", "45", "15", "60", "30"], "respuesta_correcta": "45", "puntuacion": "1/1" }, { "id": 66, "pregunta": "En la siguiente serie cuente cada N que está seguida inmediatamente por una O, siempre que la O no esté seguida por una T. Diga cuántas N en estas condiciones se encuentran. NONTOMNOTMONOO NQMNN", "opciones": ["8", "2", "6", "4", "5"], "respuesta_correcta": "4", "puntuacion": "1/1" }, { "id": 67, "pregunta": "Se dice que un hombre adverso a los cambios es:", "opciones": ["democrático", "extremista", "conservador", "anarquista", "liberal"], "respuesta_correcta": "conservador", "puntuacion": "1/1" }, { "id": 68, "pregunta": "Indique la letra que es la cuarta a la izquierda de la letra que está a la mitad del camino entre la O y la S en el alfabeto. A B C D E F G H I J K L M N Ñ O P Q R S T U V W X Y Z ", "opciones": ["N", "P", "R", "M"], "respuesta_correcta": "N", "puntuacion": "1/1" }, { "id": 69, "pregunta": "¿Qué número está en el espacio que pertenece al rectángulo y al triángulo pero no al círculo?", "opciones": ["3", "8", "12", "7", "10"], "respuesta_correcta": "10", "puntuacion": "1/1", "imagen": "figura_psicometrico.png" }, { "id": 70, "pregunta": "¿Qué número está en las mismas figuras geométricas que el número 8?", "opciones": ["6", "5", "7", "3", "9"], "respuesta_correcta": "6", "puntuacion": "1/1", "imagen": "figura_psicometrico.png" }, { "id": 71, "pregunta": "¿Cuántos espacios hay que están sólo en dos de las figuras geométricas?", "opciones": ["10", "6", "5", "7", "8"], "respuesta_correcta": "5", "puntuacion": "1/1", "imagen": "figura_psicometrico.png" }, { "id": 72, "pregunta": "Una superficie se relaciona con una línea, como una línea se relaciona con:", "opciones": ["sólido", "plano", "curva", "punto", "hilo"], "respuesta_correcta": "sólido", "puntuacion": "0/1" }, { "id": 73, "pregunta": "Si las proposiciones que siguen son verdaderas, la tercera es: 1. No se puede llegar a ser buen violinista sin mucha práctica. 2. Carlos practica mucho en el violín. 3. Carlos será un gran violinista.", "opciones": ["verdadera", "falsa", "no se sabe"], "respuesta_correcta": "no se sabe", "puntuacion": "1/1" }, { "id": 74, "pregunta": "Si las siguientes palabras se ordenaran a modo de formar una oración con sentido, ¿con qué letra terminaría la última palabra? SINCERIDAD, LA, RASGOS, CORTESIA, LA, CARÁCTER, DE, DESEABLES, Y, SON", "opciones": ["D", "R", "S", "C", "L"], "respuesta_correcta": "S", "puntuacion": "0/1" }, { "id": 75, "pregunta": "Se dice que un hombre que al tomar una decisión está influenciado por opiniones preconcebidas es:", "opciones": ["influyente", "sujeto a prejuicios", "hipócrita", "decidido", "imparcial"], "respuesta_correcta": "influyente", "puntuacion": "0/1" }, { "id": 76, "pregunta": "En una confitería se sirve una mezcla de dos partes de crema y tres de leche, ¿Cuántos litros de crema serán necesarios para hacer 15 litros de mezcla?", "opciones": ["9", "5", "7", "6", "8"], "respuesta_correcta": "5", "puntuacion": "0/1" }, { "id": 77, "pregunta": "¿Qué cosa tiene la misma relación con la sangre, que la física con el movimiento?", "opciones": ["temperatura", "venas", "cuerpo", "fisiología", "geografía"], "respuesta_correcta": "venas", "puntuacion": "0/1" }, { "id": 78, "pregunta": "Un juicio cuyo significado no es definido se dice que es:", "opciones": ["erróneo", "dudoso", "ambiguo", "desfigurado", "hipotético"], "respuesta_correcta": "ambiguo", "puntuacion": "1/1" }, { "id": 79, "pregunta": "Si se corta un alambre de 20 cm de largo de modo que un pedazo sea 2/3 del otro, ¿Cuántos centímetros más corto será el menor?", "opciones": ["3", "5", "4", "7", "6"], "respuesta_correcta": "6", "puntuacion": "0/1" }], "informacion_general": { "titulo": "Examen PsicomÃ©trico SEDENA / GN - Resultados Completos", "total_preguntas": 79 } };
+
+        function prepararExamenPsicologico() {
+            if (examenPsicologicoCorregido) return;
+
+            examenPsicologicoCorregido = rawExamenPsicologico.preguntas.map(p => {
+                return {
+                    pregunta: p.pregunta,
+                    respuesta_correcta: p.respuesta
+                };
+            });
+        }
+
+        function prepararExamenPsicometrico() {
+            if (examenPsicometricoCorregido) return;
+
+            examenPsicometricoCorregido = rawPsicometrico.preguntas.map(p => {
+                return {
+                    pregunta: p.pregunta,
+                    respuesta_correcta: p.respuesta_correcta,
+                    opciones: p.opciones,
+                    imagen: p.imagen || null
+                };
+            });
+        }
+
+        // --- FUNCIONES DE GUARDADO (PERSISTENCIA) ---
+        function saveProgress() {
+            if (!currentExamType) return;
+            const dataToSave = {
+                index: currentQuestionIndex,
+                answers: userAnswers,
+                timestamp: new Date().getTime()
+            };
+            localStorage.setItem('exam_progress_' + currentExamType, JSON.stringify(dataToSave));
+        }
+
+        function clearProgress() {
+            if (!currentExamType) return;
+            localStorage.removeItem('exam_progress_' + currentExamType);
+        }
+
+        function startExam(examType) {
+            currentExamType = examType;
+
+            if (examType === 'axiologico') {
+                currentQuestions = questions;
+                examTitleEl.textContent = "Examen Axiológico";
+                optionsStandard = [
+                    "Totalmente en desacuerdo",
+                    "En desacuerdo",
+                    "Neutral",
+                    "De acuerdo",
+                    "Totalmente de acuerdo"
+                ];
+            } else if (examType === 'psicologico') {
+                prepararExamenPsicologico();
+                currentQuestions = examenPsicologicoCorregido;
+                examTitleEl.textContent = "Examen Psicológico";
+                optionsStandard = ["Verdadero", "Falso"];
+            } else if (examType === 'psicometrico') {
+                prepararExamenPsicometrico();
+                currentQuestions = examenPsicometricoCorregido;
+                examTitleEl.textContent = "Examen Psicométrico";
+                // optionsStandard no se usa aquí porque son dinamicas, pero definimos un fallback
+                optionsStandard = [];
+            }
+
+            // Verificar si hay progreso guardado
+            const savedDataJSON = localStorage.getItem('exam_progress_' + examType);
+            if (savedDataJSON) {
+                const savedData = JSON.parse(savedDataJSON);
+                // Validar que los datos tengan sentido (ej. índice dentro de rango)
+                if (savedData.index < currentQuestions.length && confirm(`Tienes un examen de ${examType === 'axiologico' ? 'Axiológico' : 'Psicológico'} incompleto (Pregunta ${savedData.index + 1}).\n\n¿Quieres CONTINUAR donde te quedaste?\n(Cancelar para reiniciar)`)) {
+                    // Cargar datos
+                    currentQuestionIndex = savedData.index;
+                    userAnswers = savedData.answers || {};
+                    showScreen('quiz-screen');
+                    showQuestion();
+                    return; // Salimos para no reiniciar
+                }
+            }
+
+            // Si no hay guardado o el usuario elige reiniciar
+            restartExam();
+        }
+
+        function restartExam() {
+            clearProgress(); // Si reiniciamos explícitamente, borramos lo anterior
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            showScreen('quiz-screen');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const currentQ = currentQuestions[currentQuestionIndex];
+
+            // Renderizado de Contenido
+            let contentHtml = '';
+
+            // 1. Imagen (si existe)
+            if (currentQ.imagen) {
+                contentHtml += `<img src="${currentQ.imagen}" class="question-image" alt="Figura del problema">`;
+            }
+
+            // 2. Texto de la pregunta
+            contentHtml += currentQ.pregunta;
+
+            questionEl.innerHTML = contentHtml; // Usar innerHTML para interpretar la tag <img>
+
+            // Actualizar progreso
+            const progress = ((currentQuestionIndex) / currentQuestions.length) * 100;
+            progressEl.style.width = `${progress}%`;
+            counterEl.textContent = `${currentQuestionIndex + 1} / ${currentQuestions.length}`;
+
+            // Botón Anterior
+            if (currentQuestionIndex > 0) {
+                prevBtn.style.display = 'inline-block';
+            } else {
+                prevBtn.style.display = 'none';
+            }
+
+            // Generar opciones
+            optionsEl.innerHTML = '';
+            const previousAnswer = userAnswers[currentQuestionIndex] ? userAnswers[currentQuestionIndex].selected : null;
+
+            // Determinar opciones a mostrar: dinamicas o estandar
+            const optionsToShow = (currentQ.opciones && currentQ.opciones.length > 0) ? currentQ.opciones : optionsStandard;
+
+            optionsToShow.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                if (previousAnswer === opt) {
+                    btn.classList.add('selected');
+                }
+                btn.textContent = opt;
+                btn.onclick = () => selectOption(btn, opt);
+                optionsEl.appendChild(btn);
+            });
+        }
+
+        function selectOption(btn, text) {
+            // Guardar respuesta inmediatamente
+            userAnswers[currentQuestionIndex] = {
+                question: currentQuestions[currentQuestionIndex].pregunta,
+                selected: text,
+                correct: currentQuestions[currentQuestionIndex].respuesta_correcta
+            };
+
+            // GUARDAR PROGRESO AUTOMATICAMENTE
+            saveProgress();
+
+            // Animación visual rápida
+            document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+            btn.classList.add('selected');
+
+            // Avanzar automáticamente con pequeño delay
+            setTimeout(() => {
+                nextQuestion();
+            }, 300);
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+
+            // LOGICA DE PAUSA (BREAKPOINT) CADA 100 PREGUNTAS
+            // Solo pausamos si no hemos terminado el examen y es múltiplo de 100
+            if (currentQuestionIndex < currentQuestions.length && currentQuestionIndex > 0 && currentQuestionIndex % 100 === 0) {
+                triggerBreak();
+            } else {
+                if (currentQuestionIndex < currentQuestions.length) {
+                    showQuestion();
+                } else {
+                    finishQuiz();
+                }
+            }
+        }
+
+        // --- FUNCIONES DE DESCANSO ---
+        function triggerBreak() {
+            // Ocultar elementos del quiz
+            questionEl.style.display = 'none';
+            optionsEl.style.display = 'none';
+            document.querySelector('.controls').style.display = 'none';
+
+            // Mostrar pantalla de descanso
+            const breakScreen = document.getElementById('break-screen');
+            const breakMsg = document.getElementById('break-msg');
+
+            breakMsg.innerHTML = `Has completado <strong>${currentQuestionIndex}</strong> preguntas.<br>Tomar descansos breves ayuda a mantener la concentración.<br><br><strong>Tu progreso está guardado.</strong>`;
+
+            breakScreen.style.display = 'flex';
+        }
+
+        function resumeFromBreak() {
+            // Ocultar pantalla de descanso
+            document.getElementById('break-screen').style.display = 'none';
+
+            // Mostrar elementos del quiz
+            questionEl.style.display = 'block';
+            optionsEl.style.display = 'grid'; // Grid como estaba definido en CSS
+            document.querySelector('.controls').style.display = 'flex';
+
+            // Continuar
+            showQuestion();
+        }
+
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+            }
+        });
+
+        // nextBtn ya no es crítico pero se mantiene la lógica si fuese visible
+        // The original nextBtn event listener is removed as auto-advance handles navigation.
+
+        function finishQuiz() {
+            clearProgress(); // Limpiar progreso al terminar exitosamente
+            showScreen('results-screen');
+
+            let score = 0;
+            const reviewList = document.getElementById('review-list');
+            reviewList.innerHTML = '<h3>Revisión de respuestas:</h3>';
+
+            // Convert object back to array ordered
+            const answersArray = Object.keys(userAnswers).sort((a, b) => parseInt(a) - parseInt(b)).map(k => userAnswers[k]);
+
+            answersArray.forEach((ans, idx) => {
+                const isCorrect = ans.selected.toLowerCase() === ans.correct.toLowerCase();
+                if (isCorrect) score++;
+
+                const div = document.createElement('div');
+                div.className = `review-item ${isCorrect ? '' : 'error'}`;
+
+                div.innerHTML = `
+                    <div style="margin-bottom:5px;"><strong>${idx + 1}. ${ans.question}</strong></div>
+                    <div>Tu respuesta: ${ans.selected} 
+                        <span class="status-badge ${isCorrect ? 'status-correct' : 'status-incorrect'}">
+                            ${isCorrect ? 'CORRECTO' : 'ERROR'}
+                        </span>
+                    </div>
+                    ${!isCorrect ? `<div style="color:var(--primary); font-weight:bold; margin-top:5px;">✅ Correcta: ${ans.correct}</div>` : ''}
+                `;
+                reviewList.appendChild(div);
+            });
+
+
+            const percentage = Math.round((score / currentQuestions.length) * 100);
+
+            // Animacion Circulo
+            document.getElementById('score-text').textContent = `${percentage}%`;
+            document.getElementById('score-circle').style.background = `conic-gradient(var(--primary) ${percentage}%, #ddd ${percentage}%)`;
+
+            const feedbackEl = document.getElementById('feedback-msg');
+            if (percentage >= 90) feedbackEl.textContent = "¡Excelente! Estás listo.";
+            else if (percentage >= 80) feedbackEl.textContent = "Muy bien, pero repasa los errores.";
+            else feedbackEl.textContent = "Necesitas practicar más. Revisa el patrón.";
+        }
+
+        // --- SISTEMA DE MUSICA Y UI UPDATES ---
+
+        // Inicializar sistema de música
+        document.addEventListener('DOMContentLoaded', () => {
+            const audio = document.getElementById('bg-music');
+            if (audio) {
+                // Cuando termina una canción, pasar a la siguiente
+                audio.addEventListener('ended', playNextSong);
+            }
+        });
+
+        function playNextSong() {
+            const audio = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+
+            // Avanzar índice
+            currentSongIndex++;
+            if (currentSongIndex >= playlist.length) {
+                currentSongIndex = 0; // Volver al inicio (Loop de la lista)
+            }
+
+            // Cargar y reproducir
+            audio.src = playlist[currentSongIndex];
+            audio.play()
+                .then(() => {
+                    if (btn) {
+                        btn.classList.add('playing');
+                        btn.innerHTML = '⏸';
+                    }
+                })
+                .catch(e => console.log("Error al reproducir siguiente canción:", e));
+        }
+
+        function toggleMusic() {
+            const audio = document.getElementById('bg-music');
+            const btn = document.getElementById('music-toggle');
+
+            if (!audio || !btn) return;
+
+            if (audio.paused) {
+                // Si no tiene fuente cargada, cargar la canción actual
+                if (!audio.src || audio.src === '' || audio.src.endsWith('index.html')) {
+                    audio.src = playlist[currentSongIndex];
+                }
+
+                const playPromise = audio.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        btn.classList.add('playing');
+                        btn.innerHTML = '⏸'; // Pausa
+                    })
+                        .catch(error => {
+                            alert(`⚠️ No se pudo reproducir: ${playlist[currentSongIndex]}\n\nAsegúrate de que el archivo esté en la carpeta.`);
+                            console.error("Error Audio:", error);
+                        });
+                }
+            } else {
+                audio.pause();
+                btn.classList.remove('playing');
+                btn.innerHTML = '🎵'; // Nota musical
+            }
+        }
+
+        // Sobrescribimos o definimos initializeSystem para asegurar que muestre los botones
+        function initializeSystem() {
+            const settingsBtn = document.getElementById('settings-toggle');
+            const musicBtn = document.getElementById('music-toggle');
+
+            if (settingsBtn) settingsBtn.style.display = 'flex';
+            if (musicBtn) musicBtn.style.display = 'flex';
+
+            // Navegación segura
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            const menuScreen = document.getElementById('menu-screen');
+            if (menuScreen) menuScreen.classList.add('active');
+
+            if (typeof loadSavedTheme === 'function') loadSavedTheme();
+        }
+
+    </script>
+</body>
+
+</html>
