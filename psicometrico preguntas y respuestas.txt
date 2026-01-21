@@ -1,0 +1,570 @@
+{
+  "informacion_general": {
+    "titulo": "Examen Psicométrico SEDENA / GN - Resultados Completos",
+    "total_preguntas": 79,
+    "puntuacion_final": "63/79",
+    "usuario": "qfbadolforuiz@gmail.com",
+    "descripcion": "Análisis detallado de reactivos, opciones y respuestas correctas."
+  },
+  "preguntas": [
+    {
+      "id": 1,
+      "pregunta": "Lo opuesto al odio es:",
+      "opciones": ["enemistad", "miedo", "amor", "amigo", "alegría"],
+      "respuesta_seleccionada": "amor",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 2,
+      "pregunta": "Si tres lápices cuestan cinco pesos, ¿cuántos lápices se pueden comprar con cincuenta pesos?",
+      "opciones": ["10", "20", "30", "40", "50"],
+      "respuesta_seleccionada": "30",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 3,
+      "pregunta": "Un pájaro no siempre tiene:",
+      "opciones": ["alas", "ojos", "patas", "nido", "pico"],
+      "respuesta_seleccionada": "nido",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 4,
+      "pregunta": "Lo opuesto a lo honorario es:",
+      "opciones": ["derrotado", "remunerativo", "humillante", "cobarde", "pobre"],
+      "respuesta_seleccionada": "humillante",
+      "puntuacion": "0/1",
+      "respuesta_correcta": "remunerativo"
+    },
+    {
+      "id": 5,
+      "pregunta": "El zorro tiene mayor parecido con:",
+      "opciones": ["el lobo", "el gato", "el perro", "el tigre", "la ardilla"],
+      "respuesta_seleccionada": "el perro",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 6,
+      "pregunta": "El silencio tiene la misma relación con el sonido que el reposo con:",
+      "opciones": ["quietud", "movimiento", "miedo", "descanso", "ruido"],
+      "respuesta_seleccionada": "movimiento",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 7,
+      "pregunta": "Un grupo de personas que se reúnen para un fin determinado se dice que es una:",
+      "opciones": ["asamblea", "multitud", "banda", "congregación", "clase"],
+      "respuesta_seleccionada": "asamblea",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 8,
+      "pregunta": "Si un caballo puede correr a la velocidad de 6 metros en 1/4 de segundo, ¿cuántos metros correrá en 10 segundos?",
+      "opciones": ["120", "240", "480", "600", "30"],
+      "respuesta_seleccionada": "240",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 9,
+      "pregunta": "Una persona que no es de carácter firme se dice que es:",
+      "opciones": ["inconstante", "débil", "versátil", "influenciable", "cobarde"],
+      "respuesta_seleccionada": "versátil",
+      "puntuacion": "0/1",
+      "respuesta_correcta": "inconstante"
+    },
+    {
+      "id": 10,
+      "pregunta": "¿Cuál de las siguientes palabras indica lo más opuesto a la palabra difícil?",
+      "opciones": ["duro", "sencillo", "corto", "bueno", "amplio"],
+      "respuesta_seleccionada": "sencillo",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 11,
+      "pregunta": "La frase 'un grano no hace granero, pero ayuda a su compañero' significa:",
+      "opciones": ["muchas pequeñas ayudas hacen un gran resultado", "el trigo es mejor que el maíz", "debemos ser egoístas", "un solo hombre puede hacer todo el trabajo", "el granero es pequeño"],
+      "respuesta_seleccionada": "muchas pequeñas ayudas hacen un gran resultado",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 12,
+      "pregunta": "Si un niño puede caminar a 4 km/h, ¿cuánto tardará en recorrer 20 km?",
+      "opciones": ["4 horas", "5 horas", "6 horas", "10 horas", "2 horas"],
+      "respuesta_seleccionada": "5 horas",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 13,
+      "pregunta": "Lo opuesto a lo falso es:",
+      "opciones": ["incorrecto", "malo", "verdadero", "feo", "corto"],
+      "respuesta_seleccionada": "verdadero",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 14,
+      "pregunta": "¿Qué palabra no pertenece al grupo?",
+      "opciones": ["manzana", "pera", "plátano", "lechuga", "uva"],
+      "respuesta_seleccionada": "lechuga",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 15,
+      "pregunta": "La relación entre el calor y el termómetro es la misma que entre el peso y:",
+      "opciones": ["balanza", "gramo", "kilogramo", "pesado", "medida"],
+      "respuesta_seleccionada": "balanza",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 16,
+      "pregunta": "Si se ordenan las letras A, L, O, R para formar una palabra, ¿con qué letra empieza?",
+      "opciones": ["A", "L", "O", "R", "N/A"],
+      "respuesta_seleccionada": "O",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 17,
+      "pregunta": "Un hombre siempre es más _______ que su hijo.",
+      "opciones": ["alto", "viejo", "sabio", "fuerte", "rico"],
+      "respuesta_seleccionada": "viejo",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 18,
+      "pregunta": "¿Qué número sigue en la serie: 5, 10, 15, 20, ...?",
+      "opciones": ["21", "25", "30", "35", "22"],
+      "respuesta_seleccionada": "25",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 19,
+      "pregunta": "Lo opuesto a lo ancho es:",
+      "opciones": ["largo", "estrecho", "alto", "grueso", "corto"],
+      "respuesta_seleccionada": "estrecho",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 20,
+      "pregunta": "Si 25 centavos compran 5 dulces, ¿cuántos dulces compran 50 centavos?",
+      "opciones": ["10", "15", "20", "25", "5"],
+      "respuesta_seleccionada": "10",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 21,
+      "pregunta": "La mano tiene la misma relación con el brazo que el pie con:",
+      "opciones": ["pierna", "dedo", "zapato", "tobillo", "caminar"],
+      "respuesta_seleccionada": "pierna",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 22,
+      "pregunta": "Un barco siempre tiene:",
+      "opciones": ["velas", "casco", "motor", "ancla", "pasajeros"],
+      "respuesta_seleccionada": "casco",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 23,
+      "pregunta": "Lo opuesto a lo valiente es:",
+      "opciones": ["miedo", "cobarde", "fuerte", "débil", "malo"],
+      "respuesta_seleccionada": "cobarde",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 24,
+      "pregunta": "¿Cuál palabra es diferente?",
+      "opciones": ["ver", "oír", "oler", "cantar", "gustar"],
+      "respuesta_seleccionada": "cantar",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 25,
+      "pregunta": "Si las palabras (HOMBRES, LOS, SON, MORTALES) se ordenaran, ¿con qué letra empezaría la tercera palabra?",
+      "opciones": ["H", "L", "S", "M", "A"],
+      "respuesta_seleccionada": "S",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 26,
+      "pregunta": "El sol sale por el:",
+      "opciones": ["Norte", "Sur", "Este", "Oeste", "Cenit"],
+      "respuesta_seleccionada": "Este",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 27,
+      "pregunta": "¿Qué número falta en la serie: 1, 3, 5, _, 9?",
+      "opciones": ["6", "7", "8", "4", "10"],
+      "respuesta_seleccionada": "7",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 28,
+      "pregunta": "Lo opuesto a la alegría es:",
+      "opciones": ["tristeza", "enojo", "miedo", "odio", "paz"],
+      "respuesta_seleccionada": "tristeza",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 29,
+      "pregunta": "Un árbol siempre tiene:",
+      "opciones": ["frutos", "hojas", "raíces", "flores", "nidos"],
+      "respuesta_seleccionada": "raíces",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 30,
+      "pregunta": "Si 2 manzanas cuestan 10 pesos, ¿cuánto cuestan 10 manzanas?",
+      "opciones": ["20", "40", "50", "100", "80"],
+      "respuesta_seleccionada": "50",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 31,
+      "pregunta": "El zapato tiene relación con el pie como el sombrero con:",
+      "opciones": ["guante", "cabeza", "mano", "abrigo", "pelo"],
+      "respuesta_seleccionada": "cabeza",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 32,
+      "pregunta": "Lo opuesto a lo rudo es:",
+      "opciones": ["suave", "fino", "bueno", "malo", "duro"],
+      "respuesta_seleccionada": "suave",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 33,
+      "pregunta": "Un círculo no tiene:",
+      "opciones": ["curva", "centro", "lados", "radio", "área"],
+      "respuesta_seleccionada": "lados",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 34,
+      "pregunta": "La relación entre el médico y el enfermo es la misma que entre el abogado y:",
+      "opciones": ["juez", "cliente", "ley", "cárcel", "delito"],
+      "respuesta_seleccionada": "cliente",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 35,
+      "pregunta": "¿Qué palabra es diferente?",
+      "opciones": ["rojo", "verde", "azul", "dulce", "amarillo"],
+      "respuesta_seleccionada": "dulce",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 36,
+      "pregunta": "Si 4 hombres hacen un trabajo en 2 días, ¿cuánto tardará 1 hombre?",
+      "opciones": ["8 días", "4 días", "6 días", "2 días", "10 días"],
+      "respuesta_seleccionada": "8",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 37,
+      "pregunta": "Lo opuesto a lo rápido es:",
+      "opciones": ["lento", "quieto", "parado", "bajo", "corto"],
+      "respuesta_seleccionada": "lento",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 38,
+      "pregunta": "Un reloj siempre tiene:",
+      "opciones": ["números", "manecillas", "alarma", "correa", "vidrio"],
+      "respuesta_seleccionada": "manecillas",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 39,
+      "pregunta": "Si ordenamos (GATO, EL, ES, ANIMAL), ¿con qué letra termina la última palabra?",
+      "opciones": ["O", "L", "S", "L", "A"],
+      "respuesta_seleccionada": "L",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 40,
+      "pregunta": "La relación entre el día y la noche es la misma que entre la luz y:",
+      "opciones": ["sol", "lámpara", "oscuridad", "fuego", "brillo"],
+      "respuesta_seleccionada": "oscuridad",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 41,
+      "pregunta": "Lo opuesto a lo rico es:",
+      "opciones": ["malo", "pobre", "feo", "bajo", "triste"],
+      "respuesta_seleccionada": "pobre",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 42,
+      "pregunta": "Un cuadrado tiene:",
+      "opciones": ["3 lados", "4 lados", "5 lados", "6 lados", "0 lados"],
+      "respuesta_seleccionada": "4 lados",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 43,
+      "pregunta": "Si 1 kilo de carne cuesta 100 pesos, ¿cuánto cuestan 500 gramos?",
+      "opciones": ["200", "50", "25", "75", "10"],
+      "respuesta_seleccionada": "50",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 44,
+      "pregunta": "La relación entre el libro y la lectura es la misma que entre la comida y:",
+      "opciones": ["beber", "comer", "hambre", "sed", "cocina"],
+      "respuesta_seleccionada": "comer",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 45,
+      "pregunta": "¿Qué palabra no pertenece?",
+      "opciones": ["perro", "gato", "vaca", "mesa", "caballo"],
+      "respuesta_seleccionada": "mesa",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 46,
+      "pregunta": "Lo opuesto a lo amargo es:",
+      "opciones": ["ácido", "salado", "dulce", "picante", "feo"],
+      "respuesta_seleccionada": "dulce",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 47,
+      "pregunta": "Un mes siempre tiene:",
+      "opciones": ["30 días", "31 días", "días", "28 días", "festivos"],
+      "respuesta_seleccionada": "días",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 48,
+      "pregunta": "Si recorres 60 km en 1 hora, ¿cuánto recorres en 15 minutos?",
+      "opciones": ["10 km", "15 km", "20 km", "30 km", "5 km"],
+      "respuesta_seleccionada": "15 km",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 49,
+      "pregunta": "La relación entre el norte y el sur es la misma que entre el este y:",
+      "opciones": ["arriba", "abajo", "oeste", "norte", "oriente"],
+      "respuesta_seleccionada": "oeste",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 50,
+      "pregunta": "¿Qué número sigue en la serie: 2, 4, 8, 16, ...?",
+      "opciones": ["20", "24", "30", "32", "64"],
+      "respuesta_seleccionada": "32",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 51,
+      "pregunta": "Lo opuesto a lo pesado es:",
+      "opciones": ["liviano", "bajo", "corto", "bueno", "suave"],
+      "respuesta_seleccionada": "liviano",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 52,
+      "pregunta": "Un año siempre tiene:",
+      "opciones": ["365 días", "12 meses", "estaciones", "meses", "días"],
+      "respuesta_seleccionada": "meses",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 53,
+      "pregunta": "Si un pantalón cuesta 200 y tiene 50% de descuento, ¿cuánto pagas?",
+      "opciones": ["150", "100", "50", "180", "120"],
+      "respuesta_seleccionada": "100",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 54,
+      "pregunta": "La relación entre el profesor y el alumno es la misma que entre el jefe y:",
+      "opciones": ["empresa", "empleado", "trabajo", "oficina", "sueldo"],
+      "respuesta_seleccionada": "empleado",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 55,
+      "pregunta": "¿Qué palabra es diferente?",
+      "opciones": ["avión", "tren", "coche", "bicicleta", "nube"],
+      "respuesta_seleccionada": "nube",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 56,
+      "pregunta": "Lo opuesto a lo ruidoso es:",
+      "opciones": ["silencioso", "bajo", "corto", "tranquilo", "paz"],
+      "respuesta_seleccionada": "silencioso",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 57,
+      "pregunta": "Un país siempre tiene:",
+      "opciones": ["fronteras", "himno", "bandera", "nombre", "ejército"],
+      "respuesta_seleccionada": "nombre",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 58,
+      "pregunta": "Si 3x = 9, ¿cuánto vale x?",
+      "opciones": ["2", "3", "4", "6", "9"],
+      "respuesta_seleccionada": "3",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 59,
+      "pregunta": "La relación entre el pájaro y el nido es la misma que entre el hombre y:",
+      "opciones": ["casa", "trabajo", "cama", "ropa", "comida"],
+      "respuesta_seleccionada": "casa",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 60,
+      "pregunta": "¿Qué palabra es diferente?",
+      "opciones": ["lunes", "martes", "enero", "miércoles", "jueves"],
+      "respuesta_seleccionada": "enero",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 61,
+      "pregunta": "Lo opuesto a lo valioso es:",
+      "opciones": ["caro", "barato", "insignificante", "malo", "feo"],
+      "respuesta_seleccionada": "insignificante",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 62,
+      "pregunta": "Un libro siempre tiene:",
+      "opciones": ["páginas", "portada", "título", "autor", "dibujos"],
+      "respuesta_seleccionada": "páginas",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 63,
+      "pregunta": "Si sumas 1/2 + 1/4, el resultado es:",
+      "opciones": ["1/6", "3/4", "1/2", "2/6", "1"],
+      "respuesta_seleccionada": "3/4",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 64,
+      "pregunta": "La relación entre el pez y el agua es la misma que entre el ave y:",
+      "opciones": ["tierra", "aire", "nido", "vuelo", "pluma"],
+      "respuesta_seleccionada": "aire",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 65,
+      "pregunta": "¿Qué palabra no pertenece?",
+      "opciones": ["México", "España", "París", "Italia", "Francia"],
+      "respuesta_seleccionada": "París",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 66,
+      "pregunta": "Lo opuesto a lo nuevo es:",
+      "opciones": ["viejo", "usado", "roto", "malo", "feo"],
+      "respuesta_seleccionada": "viejo",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 67,
+      "pregunta": "Un equipo siempre tiene:",
+      "opciones": ["uniforme", "capitán", "miembros", "estadio", "trofeos"],
+      "respuesta_seleccionada": "miembros",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 68,
+      "pregunta": "Si un coche viaja a 80 km/h, ¿cuánto tarda en recorrer 40 km?",
+      "opciones": ["1 hora", "30 minutos", "15 minutos", "2 horas", "45 minutos"],
+      "respuesta_seleccionada": "30 minutos",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 69,
+      "pregunta": "La relación entre el teclado y la computadora es la misma que entre el control y:",
+      "opciones": ["pantalla", "televisión", "cable", "mando", "juego"],
+      "respuesta_seleccionada": "televisión",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 70,
+      "pregunta": "¿Qué número sigue: 100, 90, 80, 70, ...?",
+      "opciones": ["65", "60", "50", "40", "75"],
+      "respuesta_seleccionada": "60",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 71,
+      "pregunta": "Lo opuesto a lo público es:",
+      "opciones": ["privado", "secreto", "oscuro", "malo", "solo"],
+      "respuesta_seleccionada": "privado",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 72,
+      "pregunta": "Una familia siempre tiene:",
+      "opciones": ["hijos", "padres", "vínculos", "casa", "dinero"],
+      "respuesta_seleccionada": "vínculos",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 73,
+      "pregunta": "Si un ángulo mide 90 grados, se llama:",
+      "opciones": ["agudo", "obtuso", "recto", "llano", "perigonal"],
+      "respuesta_seleccionada": "recto",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 74,
+      "pregunta": "Si las palabras abajo se pusieran en sentido, ¿con qué letra terminaría la última palabra? SINCERIDAD, LA, RASGOS, CORTESIA, LA, CARÁCTER, DE, DESEABLES, Y, SON",
+      "opciones": ["D", "R", "S", "C", "L"],
+      "respuesta_seleccionada": "D",
+      "puntuacion": "0/1",
+      "respuesta_correcta": "S"
+    },
+    {
+      "id": 75,
+      "pregunta": "Se dice que un hombre que al tomar una decisión está influenciado por opiniones preconcebidas es:",
+      "opciones": ["influyente", "sujeto a prejuicios", "hipócrita", "decidido", "imparcial"],
+      "respuesta_seleccionada": "sujeto a prejuicios",
+      "puntuacion": "0/1",
+      "respuesta_correcta": "influyente"
+    },
+    {
+      "id": 76,
+      "pregunta": "En una confitería se sirve una mezcla de dos partes de crema y tres de leche, ¿Cuántos litros de crema serán necesarios para hacer 15 litros de mezcla?",
+      "opciones": ["9", "5", "7", "6", "8"],
+      "respuesta_seleccionada": "6",
+      "puntuacion": "0/1",
+      "respuesta_correcta": "5"
+    },
+    {
+      "id": 77,
+      "pregunta": "¿Qué cosa tiene la misma relación con la sangre que la física con el movimiento?",
+      "opciones": ["temperatura", "venas", "cuerpo", "fisiología", "geografía"],
+      "respuesta_seleccionada": "fisiología",
+      "puntuacion": "0/1",
+      "respuesta_correcta": "venas"
+    },
+    {
+      "id": 78,
+      "pregunta": "Un juicio cuyo significado no es definido se dice que es:",
+      "opciones": ["erróneo", "dudoso", "ambiguo", "desfigurado", "hipotético"],
+      "respuesta_seleccionada": "ambiguo",
+      "puntuacion": "1/1"
+    },
+    {
+      "id": 79,
+      "pregunta": "Si se corta un alambre de 30 metros de largo para que un trozo sea 2/3 del otro, ¿cuántos metros tendrá el trozo más largo?",
+      "opciones": ["12", "15", "18", "20", "24"],
+      "respuesta_seleccionada": "18",
+      "puntuacion": "1/1"
+    }
+  ]
+}
